@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Task Rewards — USDT</title>
+  <title>টাস্ক রিওয়ার্ড — টাকা</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg: #0b0f17;
-      --card: #101826;
-      --card-2:#0e1522;
-      --text:#e9eef7;
-      --muted:#9fb0c6;
-      --brand:#7c5cff;
-      --brand-2:#00e0b8;
+      --bg: #1c2a38;
+      --card: #2c3a4d;
+      --card-2:#223040;
+      --text:#f0f7ff;
+      --muted:#aabccd;
+      --brand:#00a3cc;
+      --brand-2:#73e042;
       --accent:#ffd166;
       --danger:#ef476f;
       --success:#06d6a0;
@@ -27,10 +27,10 @@
       font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       color:var(--text);
       background:
-        radial-gradient(1200px 600px at -10% -10%, rgba(124,92,255,.15), transparent 60%),
-        radial-gradient(900px 500px at 110% -10%, rgba(0,224,184,.12), transparent 60%),
+        radial-gradient(1200px 600px at -10% -10%, rgba(0,163,204,.15), transparent 60%),
+        radial-gradient(900px 500px at 110% -10%, rgba(115,224,66,.12), transparent 60%),
         radial-gradient(900px 600px at 50% 120%, rgba(255,209,102,.12), transparent 60%),
-        linear-gradient(180deg,#0b0f17 0%, #0a101a 100%);
+        linear-gradient(180deg,#1c2a38 0%, #172432 100%);
       display:flex; justify-content:center; align-items:center; padding:20px;
     }
 
@@ -46,7 +46,7 @@
     /* Header */
     .header{
       display:flex; align-items:center; justify-content:space-between;
-      padding:16px 18px; background:rgba(16,24,38,.6);
+      padding:16px 18px; background:rgba(44,58,77,.6);
       border-bottom:1px solid rgba(255,255,255,.06);
       position:sticky; top:0; z-index:5;
     }
@@ -62,9 +62,9 @@
     .balance{
       margin:18px; border-radius:22px; padding:20px 18px;
       background:
-        radial-gradient(140% 140% at 0% 0%, rgba(124,92,255,.25), transparent 60%),
-        radial-gradient(120% 120% at 100% 0%, rgba(0,224,184,.25), transparent 60%),
-        linear-gradient(180deg, #0e1522, #0c1320);
+        radial-gradient(140% 140% at 0% 0%, rgba(0,163,204,.25), transparent 60%),
+        radial-gradient(120% 120% at 100% 0%, rgba(115,224,66,.25), transparent 60%),
+        linear-gradient(180deg, #223040, #1c2a38);
       border:1px solid rgba(255,255,255,.08);
     }
     .balance h2{ font-size:13px; font-weight:600; color:var(--muted); text-transform:uppercase; letter-spacing:.12em }
@@ -95,10 +95,10 @@
       width:100%; padding:16px; border-radius:16px; border:none; cursor:pointer;
       font-weight:800; letter-spacing:.2px; margin:16px 0 2px;
       background:linear-gradient(90deg, var(--brand), var(--brand-2));
-      color:#081018; box-shadow:0 12px 30px rgba(124,92,255,.35);
+      color:#1c2a38; box-shadow:0 12px 30px rgba(0,163,204,.35);
       transition:transform .12s ease, box-shadow .12s ease, filter .12s ease;
     }
-    .btn:hover{ transform:translateY(-1px); box-shadow:0 16px 36px rgba(124,92,255,.45) }
+    .btn:hover{ transform:translateY(-1px); box-shadow:0 16px 36px rgba(0,163,204,.45) }
     .btn:disabled{ filter:saturate(.2) brightness(.8); cursor:not-allowed; transform:none; box-shadow:none }
 
     .btn-secondary{
@@ -122,7 +122,7 @@
       transition:border-color .12s ease, background .12s ease;
       margin:10px 0 6px;
     }
-    .input::placeholder{ color:#7c8da6 }
+    .input::placeholder{ color:#aabccd }
     .input:focus{ border-color:var(--brand) }
 
     .method{
@@ -148,7 +148,7 @@
       position:fixed; left:50%; transform:translateX(-50%);
       bottom:14px; width:100%; max-width:460px; padding:10px 12px;
       display:grid; grid-template-columns:repeat(5,1fr); gap:10px;
-      background:rgba(16,24,38,.75); border:1px solid rgba(255,255,255,.08);
+      background:rgba(44,58,77,.75); border:1px solid rgba(255,255,255,.08);
       border-radius:18px; backdrop-filter: blur(10px);
     }
     .nav-item{
@@ -158,7 +158,7 @@
       font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.1em;
     }
     .nav-item svg{ width:22px; height:22px }
-    .nav-item.active{ color:var(--text); background:rgba(124,92,255,.12) }
+    .nav-item.active{ color:var(--text); background:rgba(0,163,204,.12) }
     .nav-item:hover{ transform:translateY(-1px) }
 
     .screen{ display:none; animation:fade .25s ease }
@@ -175,219 +175,216 @@
 <body>
   <div class="container" id="app">
 
-    <!-- HOME -->
     <div id="home-screen" class="screen active">
       <div class="header">
         <button class="hdr-btn" onclick="window.history.back()">Back</button>
-        <div class="title">Task Rewards</div>
-        <button class="hdr-btn" onclick="showMenu()">Menu</button>
+        <div class="title">টাস্ক রিওয়ার্ড</div>
+        <button class="hdr-btn" onclick="showMenu()">মেনু</button>
       </div>
 
       <div class="balance">
-        <h2>Balance</h2>
-        <div class="balance-amount" id="balance">0.00 USDT</div>
+        <h2>ব্যালেন্স</h2>
+        <div class="balance-amount" id="balance">0.00 টাকা</div>
       </div>
 
       <div class="content">
-        <div class="section-title">Daily Check-in Bonus</div>
+        <div class="section-title">দৈনিক চেক-ইন বোনাস</div>
         <div class="note">
-          Keep your streak active and claim a small bonus every day.
+          আপনার ধারাবাহিকতা ধরে রাখুন এবং প্রতিদিন একটি ছোট বোনাস দাবি করুন।
         </div>
 
         <div class="grid">
           <div class="card">
-            <h4>Current Streak</h4>
-            <div class="value"><span id="current-streak">0</span><small>days</small></div>
+            <h4>বর্তমান ধারাবাহিকতা</h4>
+            <div class="value"><span id="current-streak">0</span><small>দিন</small></div>
           </div>
           <div class="card">
-            <h4>Total Earned</h4>
-            <div class="value"><span id="total-earned">0.00</span><small>USDT</small></div>
+            <h4>মোট আয়</h4>
+            <div class="value"><span id="total-earned">0.00</span><small>টাকা</small></div>
           </div>
         </div>
 
-        <button class="btn" id="checkin-btn">Claim Daily Reward</button>
+        <button class="btn" id="checkin-btn">দৈনিক পুরস্কার দাবি করুন</button>
       </div>
     </div>
 
-    <!-- ADS -->
     <div id="ads-screen" class="screen">
       <div class="header">
         <button class="hdr-btn" onclick="showScreen('home-screen')">Back</button>
-        <div class="title">Watch Ads</div>
-        <button class="hdr-btn" onclick="showMenu()">Menu</button>
+        <div class="title">বিজ্ঞাপন দেখুন</div>
+        <button class="hdr-btn" onclick="showMenu()">মেনু</button>
       </div>
 
       <div class="balance">
-        <h2>Balance</h2>
-        <div class="balance-amount" id="ads-balance">0.00 USDT</div>
+        <h2>ব্যালেন্স</h2>
+        <div class="balance-amount" id="ads-balance">0.00 টাকা</div>
       </div>
 
       <div class="content">
-        <div class="section-title">Ad Tasks</div>
-        <div class="note">Watch ads to earn USDT. Hourly and daily limits apply.</div>
+        <div class="section-title">বিজ্ঞাপন টাস্ক</div>
+        <div class="note">টাকা উপার্জনের জন্য বিজ্ঞাপন দেখুন। প্রতি ঘণ্টা এবং দৈনিক সীমা প্রযোজ্য।</div>
 
         <div class="card mt-12">
-          <h4>Daily Tasks</h4>
+          <h4>দৈনিক টাস্ক</h4>
           <div class="value"><span id="daily-tasks">0/60</span></div>
         </div>
         <div class="card mt-12">
-          <h4>Lifetime Tasks</h4>
+          <h4>লাইফটাইম টাস্ক</h4>
           <div class="value"><span id="lifetime-tasks">0</span></div>
         </div>
         <div class="card mt-12">
-          <h4>Hourly Tasks</h4>
+          <h4>প্রতি ঘণ্টা টাস্ক</h4>
           <div class="value"><span id="hourly-tasks">0/20</span></div>
         </div>
         <div class="card mt-12">
-          <h4>Total Earnings</h4>
-          <div class="value"><span id="total-earnings">0.00</span><small>USDT</small></div>
+          <h4>মোট উপার্জন</h4>
+          <div class="value"><span id="total-earnings">0.00</span><small>টাকা</small></div>
         </div>
 
         <div class="ad-container mt-16" id="ad-container">
-          <p class="center">Click the button to watch an ad and earn rewards.</p>
-          <button class="btn" onclick="showAdAndReward()" id="task-btn">Watch Ad (+0.02 USDT)</button>
+          <p class="center">বিজ্ঞাপন দেখতে এবং পুরস্কার জিততে বোতামে ক্লিক করুন।</p>
+          <button class="btn" onclick="showAdAndReward()" id="task-btn">বিজ্ঞাপন দেখুন (+7 টাকা)</button>
           <div id="ad-status" class="ad-status"></div>
         </div>
       </div>
     </div>
 
-    <!-- TELEGRAM TASK -->
     <div id="tg-screen" class="screen">
       <div class="header">
         <button class="hdr-btn" onclick="showScreen('home-screen')">Back</button>
-        <div class="title">Telegram Task</div>
-        <button class="hdr-btn" onclick="showMenu()">Menu</button>
+        <div class="title">টেলিগ্রাম টাস্ক</div>
+        <button class="hdr-btn" onclick="showMenu()">মেনু</button>
       </div>
 
       <div class="balance">
-        <h2>Balance</h2>
-        <div class="balance-amount" id="tg-balance">0.00 USDT</div>
+        <h2>ব্যালেন্স</h2>
+        <div class="balance-amount" id="tg-balance">0.00 টাকা</div>
       </div>
 
       <div class="content center">
-        <div class="section-title">Join & Verify</div>
-        <div class="note">Join our Telegram channel and verify to get a one-time bonus.</div>
+        <div class="section-title">যোগ দিন এবং যাচাই করুন</div>
+        <div class="note">আমাদের টেলিগ্রাম চ্যানেলে যোগ দিন এবং একবারের জন্য একটি বোনাস পেতে যাচাই করুন।</div>
 
         <div class="mt-20">
-          <p class="mt-8">Join the official channel:</p>
-          <button class="btn" onclick="window.open('https://t.me/PUFI83','_blank')">Open Telegram Channel</button>
-          <button class="btn btn-secondary" onclick="verifyTelegram()" id="verify-btn">Verify Join (+0.50 USDT)</button>
+          <p class="mt-8">অফিসিয়াল চ্যানেলে যোগ দিন:</p>
+          <button class="btn" onclick="window.open('https://t.me/PUFI83','_blank')">টেলিগ্রাম চ্যানেল খুলুন</button>
+          <button class="btn btn-secondary" onclick="verifyTelegram()" id="verify-btn">যোগদান যাচাই করুন (+50 টাকা)</button>
         </div>
       </div>
     </div>
 
-    <!-- WITHDRAW -->
     <div id="withdraw-screen" class="screen">
       <div class="header">
         <button class="hdr-btn" onclick="showScreen('home-screen')">Back</button>
-        <div class="title">Withdraw</div>
-        <button class="hdr-btn" onclick="showMenu()">Menu</button>
+        <div class="title">উত্তোলন</div>
+        <button class="hdr-btn" onclick="showMenu()">মেনু</button>
       </div>
 
       <div class="balance">
-        <h2>Balance</h2>
-        <div class="balance-amount" id="withdraw-balance">0.00 USDT</div>
+        <h2>ব্যালেন্স</h2>
+        <div class="balance-amount" id="withdraw-balance">0.00 টাকা</div>
       </div>
 
       <div class="content">
-        <div class="section-title">Request Payout</div>
+        <div class="section-title">পেমেন্ট অনুরোধ করুন</div>
         <div class="note">
-          Minimum withdraw is <b>5 USDT</b>. Method: <b>USDT-TON</b>.
+          সর্বনিম্ন উত্তোলন <b>2000 টাকা</b>।
         </div>
 
-        <div id="referral-warning" class="warn" style="display:none;">
-          You must have at least <b>6 referrals</b> to withdraw.
+        <div id="referral-warning" class="warn">
+          উত্তোলন করতে আপনার কমপক্ষে <b>7 জন রেফারেল</b> থাকতে হবে।
         </div>
 
-        <div class="label mt-16">Amount (USDT)</div>
-        <input type="number" step="0.01" class="input" id="withdraw-amount" placeholder="Enter amount (min 5.00)"/>
-        <div class="label">USDT-TON Address</div>
-        <input type="text" class="input" id="withdraw-address" placeholder="Enter your USDT-TON wallet address"/>
+        <div class="label mt-16">পরিমাণ (টাকা)</div>
+        <input type="number" step="0.01" class="input" id="withdraw-amount" placeholder="পরিমাণ লিখুন (সর্বনিম্ন 2000.00)"/>
+        <div class="label">নম্বর</div>
+        <input type="text" class="input" id="withdraw-address" placeholder="আপনার নগদ/বিকাশ নম্বর লিখুন"/>
 
-        <div class="label">Payment Method</div>
+        <div class="label">পেমেন্ট পদ্ধতি</div>
         <label class="method">
-          <input type="radio" name="payment" id="usdt-ton" checked>
-          <span><b>USDT-TON</b> (TRON/Ton-compatible wallet address)</span>
+          <input type="radio" name="payment" id="nagad" checked>
+          <span><b>নগদ</b></span>
+        </label>
+        <label class="method">
+          <input type="radio" name="payment" id="bkash">
+          <span><b>বিকাশ</b></span>
         </label>
 
-        <button class="btn" onclick="requestWithdrawal()">Submit Withdraw Request</button>
+        <button class="btn" onclick="requestWithdrawal()">উত্তোলনের অনুরোধ জমা দিন</button>
 
         <div id="withdrawal-status" class="status">
-          <h4 style="margin-bottom:6px;">Withdrawal request submitted!</h4>
+          <h4 style="margin-bottom:6px;">উত্তোলনের অনুরোধ জমা দেওয়া হয়েছে!</h4>
           <p id="status-message"></p>
-          <p class="mt-8" style="color:var(--muted);">Your payment will be processed soon.</p>
+          <p class="mt-8" style="color:var(--muted);">আপনার পেমেন্ট শীঘ্রই প্রক্রিয়া করা হবে।</p>
         </div>
       </div>
     </div>
 
-    <!-- PROFILE -->
     <div id="profile-screen" class="screen">
       <div class="header">
         <button class="hdr-btn" onclick="showScreen('home-screen')">Back</button>
-        <div class="title">Profile</div>
-        <button class="hdr-btn" onclick="showMenu()">Menu</button>
+        <div class="title">প্রোফাইল</div>
+        <button class="hdr-btn" onclick="showMenu()">মেনু</button>
       </div>
 
       <div class="balance">
-        <h2>Balance</h2>
-        <div class="balance-amount" id="profile-balance">0.00 USDT</div>
+        <h2>ব্যালেন্স</h2>
+        <div class="balance-amount" id="profile-balance">0.00 টাকা</div>
       </div>
 
       <div class="content">
-        <div class="section-title">Overview</div>
-        <div class="note center">Joined on <b>July 31, 2025</b></div>
+        <div class="section-title">পর্যবেক্ষণ</div>
+        <div class="note center">যোগদান করেছেন: <b>জুলাই 31, 2025</b></div>
 
         <div class="grid mt-16">
           <div class="card">
-            <h4>Total Earned</h4>
-            <div class="value"><span id="p-total-earned">0.00</span><small>USDT</small></div>
+            <h4>মোট আয়</h4>
+            <div class="value"><span id="p-total-earned">0.00</span><small>টাকা</small></div>
           </div>
           <div class="card">
-            <h4>Current Streak</h4>
-            <div class="value"><span id="p-current-streak">0</span><small>days</small></div>
+            <h4>বর্তমান ধারাবাহিকতা</h4>
+            <div class="value"><span id="p-current-streak">0</span><small>দিন</small></div>
           </div>
           <div class="card">
-            <h4>Tasks Done</h4>
+            <h4>সম্পন্ন টাস্ক</h4>
             <div class="value" id="tasks-done">0</div>
           </div>
           <div class="card">
-            <h4>Withdrawals</h4>
+            <h4>উত্তোলন</h4>
             <div class="value" id="withdrawals-count">0</div>
           </div>
           <div class="card">
-            <h4>Referrals</h4>
+            <h4>রেফারেল</h4>
             <div class="value" id="referrals-count">0</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- NAV -->
     <div class="nav">
       <div class="nav-item active" onclick="showScreen('home-screen')">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-        Home
+        হোম
       </div>
       <div class="nav-item" onclick="showScreen('ads-screen')">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
-        Ads
+        বিজ্ঞাপন
       </div>
       <div class="nav-item" onclick="showScreen('tg-screen')">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        Telegram
+        টেলিগ্রাম
       </div>
       <div class="nav-item" onclick="showScreen('withdraw-screen')">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-        Withdraw
+        উত্তোলন
       </div>
       <div class="nav-item" onclick="showScreen('profile-screen')">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        Profile
+        প্রোফাইল
       </div>
     </div>
   </div>
 
-  <!-- DO NOT CHANGE: Gigapub / Ads loader (left untouched as requested) -->
   <script data-project-id="1268">
   !function(){
     var s=document.currentScript,p=s.getAttribute('data-project-id')||'default';
@@ -411,15 +408,16 @@
   </script>
 
   <script>
-    // ------- Config (USDT version) -------
+    // ------- Config (BDT/টাকা version) -------
     const DAILY_ADS_LIMIT = 60;
     const HOURLY_ADS_LIMIT = 20;
-    const AD_REWARD_AMOUNT = 0.02;              // per ad in USDT
-    const DAILY_CHECKIN_REWARD = 0.05;          // daily check-in in USDT
-    const MIN_WITHDRAWAL = 5;                   // USDT
-    const REQUIRED_REFERRALS = 6;
+    const AD_REWARD_AMOUNT = 7;              // per ad in টাকা
+    const AD_RELOAD_DELAY = 7000;            // 7 seconds
+    const DAILY_CHECKIN_REWARD = 5;          // daily check-in in টাকা
+    const MIN_WITHDRAWAL = 2000;             // টাকা
+    const REQUIRED_REFERRALS = 7;
     const TELEGRAM_CHANNEL_LINK = "https://t.me/PUFI83";
-    const TELEGRAM_BONUS = 0.5;                 // one-time join bonus (USDT)
+    const TELEGRAM_BONUS = 50;               // one-time join bonus (টাকা)
 
     // ------- State -------
     let userData = {
@@ -443,17 +441,17 @@
     // ------- Storage -------
     function loadUserData(){
       try{
-        const saved = localStorage.getItem('usdtTaskUserData');
+        const saved = localStorage.getItem('bdtTaskUserData');
         if(saved){
           userData = { ...userData, ...JSON.parse(saved) };
         }
       }catch(e){
         console.error('Load error', e);
-        localStorage.removeItem('usdtTaskUserData');
+        localStorage.removeItem('bdtTaskUserData');
       }
     }
     function saveUserData(){
-      try{ localStorage.setItem('usdtTaskUserData', JSON.stringify(userData)); }
+      try{ localStorage.setItem('bdtTaskUserData', JSON.stringify(userData)); }
       catch(e){ console.error('Save error', e); }
     }
 
@@ -462,7 +460,7 @@
 
     function updateBalances(){
       document.querySelectorAll('.balance-amount').forEach(el=>{
-        el.textContent = fmt(userData.balance) + ' USDT';
+        el.textContent = fmt(userData.balance) + ' টাকা';
       });
     }
     function updateStats(){
@@ -498,10 +496,10 @@
       if(!tgBtn) return;
       if(userData.telegramVerified){
         tgBtn.disabled = true;
-        tgBtn.textContent = 'Already Verified';
+        tgBtn.textContent = 'ইতিমধ্যে যাচাই করা হয়েছে';
       }else{
         tgBtn.disabled = false;
-        tgBtn.textContent = `Verify Join (+${fmt(TELEGRAM_BONUS)} USDT)`;
+        tgBtn.textContent = `যোগদান যাচাই করুন (+${fmt(TELEGRAM_BONUS)} টাকা)`;
       }
     }
 
@@ -523,7 +521,7 @@
       updateAll();
     }
 
-    function showMenu(){ alert('Menu placeholder') }
+    function showMenu(){ alert('মেনু প্লেসহোল্ডার') }
 
     // ------- Task Availability -------
     function checkTaskAvailability(){
@@ -535,15 +533,24 @@
       updateTaskCounts();
 
       const taskBtn = byId('task-btn');
-      taskBtn.textContent = `Watch Ad (+${fmt(AD_REWARD_AMOUNT)} USDT)`;
+      taskBtn.textContent = `বিজ্ঞাপন দেখুন (+${fmt(AD_REWARD_AMOUNT)} টাকা)`;
 
       if(userData.dailyTasksCompleted >= DAILY_ADS_LIMIT){
-        taskBtn.disabled = true; taskBtn.textContent = 'Daily limit reached'; return;
+        taskBtn.disabled = true; taskBtn.textContent = 'দৈনিক সীমা পৌঁছে গেছে'; return;
       }
       if(userData.hourlyTasksCompleted >= HOURLY_ADS_LIMIT){
-        taskBtn.disabled = true; taskBtn.textContent = 'Hourly limit reached'; return;
+        taskBtn.disabled = true; taskBtn.textContent = 'প্রতি ঘণ্টার সীমা পৌঁছে গেছে'; return;
       }
-      taskBtn.disabled = false;
+      
+      // Check for 7-second cooldown
+      if(last && now.getTime() - last.getTime() < AD_RELOAD_DELAY){
+        const remaining = Math.ceil((AD_RELOAD_DELAY - (now.getTime() - last.getTime())) / 1000);
+        taskBtn.disabled = true;
+        taskBtn.textContent = `পরবর্তী বিজ্ঞাপন ${remaining} সেকেন্ডে`;
+        setTimeout(checkTaskAvailability, remaining * 1000);
+      } else {
+        taskBtn.disabled = false;
+      }
     }
 
     // ------- Ads flow (Gigapub unchanged) -------
@@ -551,30 +558,30 @@
       const taskBtn = byId('task-btn');
       const adStatus = byId('ad-status');
       taskBtn.disabled = true;
-      taskBtn.textContent = 'Loading ad...';
+      taskBtn.textContent = 'বিজ্ঞাপন লোড হচ্ছে...';
       adStatus.textContent = '';
 
       if(window.showGiga){
         window.showGiga()
           .then(()=>{
-            adStatus.textContent = 'Ad finished successfully!';
+            adStatus.textContent = 'বিজ্ঞাপন সফলভাবে শেষ হয়েছে!';
             adStatus.style.color = '#06d6a0';
             completeTask();
           })
           .catch(e=>{
             console.error('Ad error:', e);
-            adStatus.textContent = 'Ad failed. Please try again.';
+            adStatus.textContent = 'বিজ্ঞাপন ব্যর্থ হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।';
             adStatus.style.color = '#ef476f';
             taskBtn.disabled = false;
-            taskBtn.textContent = `Watch Ad (+${fmt(AD_REWARD_AMOUNT)} USDT)`;
+            taskBtn.textContent = `বিজ্ঞাপন দেখুন (+${fmt(AD_REWARD_AMOUNT)} টাকা)`;
           });
       }else{
         // fallback simulation
-        adStatus.textContent = 'Ad service unavailable. Simulating...';
+        adStatus.textContent = 'বিজ্ঞাপন পরিষেবা অনুপলব্ধ। সিমুলেশন হচ্ছে...';
         adStatus.style.color = '#ffd166';
         setTimeout(()=>{
           completeTask();
-          adStatus.textContent = 'Simulated ad completed!';
+          adStatus.textContent = 'সিমুলেটেড বিজ্ঞাপন সম্পন্ন হয়েছে!';
           adStatus.style.color = '#06d6a0';
         }, 1000);
       }
@@ -589,14 +596,15 @@
       userData.tasksDone++;
       userData.lastTaskTime = new Date();
 
-      updateAll(); saveUserData(); checkTaskAvailability();
+      updateAll(); saveUserData();
+      setTimeout(checkTaskAvailability, AD_RELOAD_DELAY);
     }
 
     // ------- Check-in -------
     function claimDailyReward(){
       const today = new Date().toDateString();
       if(userData.lastCheckin === today){
-        alert('You already claimed today\'s reward.'); return;
+        alert('আপনি আজকের পুরস্কার ইতিমধ্যে দাবি করেছেন।'); return;
       }
       userData.balance += DAILY_CHECKIN_REWARD;
       userData.totalEarnings += DAILY_CHECKIN_REWARD;
@@ -606,14 +614,14 @@
       updateAll(); saveUserData();
 
       const btn = byId('checkin-btn');
-      if(btn){ btn.textContent='Come back tomorrow'; btn.disabled = true; }
-      alert(`Daily reward claimed! You earned ${fmt(DAILY_CHECKIN_REWARD)} USDT.`);
+      if(btn){ btn.textContent='কাল ফিরে আসুন'; btn.disabled = true; }
+      alert(`দৈনিক পুরস্কার দাবি করা হয়েছে! আপনি ${fmt(DAILY_CHECKIN_REWARD)} টাকা উপার্জন করেছেন।`);
     }
 
     // ------- Telegram verify -------
     function verifyTelegram(){
       if(userData.telegramVerified){
-        alert('You already verified your Telegram join.'); return;
+        alert('আপনি আপনার টেলিগ্রাম যোগদান ইতিমধ্যে যাচাই করেছেন।'); return;
       }
       // simple client-side verify action (no API) — awards once
       userData.balance += TELEGRAM_BONUS;
@@ -621,7 +629,7 @@
       userData.telegramVerified = true;
 
       updateAll(); saveUserData(); updateTelegramButton();
-      alert(`Telegram verified! You earned ${fmt(TELEGRAM_BONUS)} USDT.`);
+      alert(`টেলিগ্রাম যাচাই করা হয়েছে! আপনি ${fmt(TELEGRAM_BONUS)} টাকা উপার্জন করেছেন।`);
     }
 
     // ------- Withdraw -------
@@ -634,31 +642,33 @@
       statusDiv.style.display = 'none';
 
       if(userData.referrals < REQUIRED_REFERRALS){
-        alert(`You must have at least ${REQUIRED_REFERRALS} referrals to withdraw.`); return;
+        alert(`উত্তোলন করতে আপনার কমপক্ষে ${REQUIRED_REFERRALS} জন রেফারেল থাকতে হবে।`); return;
       }
-      if(!amount || isNaN(amount)){ alert('Please enter a valid amount.'); return; }
-      if(amount < MIN_WITHDRAWAL){ alert(`Minimum withdrawal is ${fmt(MIN_WITHDRAWAL)} USDT.`); return; }
-      if(amount > userData.balance){ alert('Insufficient balance.'); return; }
-      if(!address){ alert('Please enter a valid USDT-TON address.'); return; }
+      if(!amount || isNaN(amount)){ alert('অনুগ্রহ করে একটি বৈধ পরিমাণ লিখুন।'); return; }
+      if(amount < MIN_WITHDRAWAL){ alert(`সর্বনিম্ন উত্তোলন ${fmt(MIN_WITHDRAWAL)} টাকা।`); return; }
+      if(amount > userData.balance){ alert('অপর্যাপ্ত ব্যালেন্স।'); return; }
+      if(!address){ alert('অনুগ্রহ করে একটি বৈধ নম্বর লিখুন।'); return; }
+
+      const selectedMethod = document.querySelector('input[name="payment"]:checked').id;
 
       userData.balance -= amount;
       userData.withdrawals++;
       updateAll(); saveUserData();
 
       statusDiv.style.display = 'block';
-      msg.textContent = `Your ${fmt(amount)} USDT withdrawal via USDT-TON has been submitted.`;
+      msg.textContent = `আপনার ${fmt(amount)} টাকা উত্তোলনের অনুরোধ ${selectedMethod.toUpperCase()} এর মাধ্যমে জমা দেওয়া হয়েছে।`;
 
       byId('withdraw-amount').value = '';
       byId('withdraw-address').value = '';
 
       console.log(`Withdrawal Request:
 User ID: ${userData.userId}
-Amount: ${fmt(amount)} USDT
-Method: USDT-TON
+Amount: ${fmt(amount)} টাকা
+Method: ${selectedMethod}
 Address: ${address}
 Date: ${new Date().toLocaleString()}`);
 
-      alert('Withdrawal request submitted. Your payment will be processed soon.');
+      alert('উত্তোলনের অনুরোধ জমা দেওয়া হয়েছে। আপনার পেমেন্ট শীঘ্রই প্রক্রিয়া করা হবে।');
     }
 
     // ------- Utilities -------
@@ -672,10 +682,10 @@ Date: ${new Date().toLocaleString()}`);
       const btn = byId('checkin-btn');
       if(btn){
         if(userData.lastCheckin !== today){
-          btn.textContent = 'Claim Daily Reward';
+          btn.textContent = 'দৈনিক পুরস্কার দাবি করুন';
           btn.disabled = false;
         }else{
-          btn.textContent = 'Come back tomorrow';
+          btn.textContent = 'কাল ফিরে আসুন';
           btn.disabled = true;
         }
       }
