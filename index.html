@@ -4,22 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>𝗔𝗗𝗦 𝗧𝗢 𝗘𝗔𝗥𝗡𝗜𝗡𝗚 𝗠𝗢𝗡𝗘𝗬</title>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
     
-    <!-- Firebase SDKs (simplified version) -->
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
-
     <style>
         :root {
-            /* Muted Modern Theme Colors */
             --primary-color: #4A90E2;
             --primary-dark: #357ABD;
             --secondary-color: #50E3C2;
@@ -32,14 +29,11 @@
             --text-light: #F7F7F7;
             --border-color-light: #E0E0E0;
             --border-color-dark: #4A657D;
-
-            /* Sizes */
             --border-radius: 12px;
             --border-radius-sm: 8px;
             --transition: all 0.3s ease-in-out;
         }
 
-        /* Dark Mode Specific Variables */
         body.dark-mode {
             background-color: var(--bg-dark);
             color: var(--text-light);
@@ -55,7 +49,6 @@
             --toggle-bg: #4A657D;
         }
 
-        /* Light Mode Specific Variables */
         body:not(.dark-mode) {
             background-color: var(--bg-light);
             color: var(--text-dark);
@@ -81,7 +74,6 @@
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
             overflow-x: hidden;
-            position: relative;
             transition: background-color var(--transition), color var(--transition);
         }
 
@@ -92,7 +84,6 @@
             background-color: var(--bg-light);
         }
 
-        /* Loading Page Styles */
         #loadingPage {
             position: fixed;
             top: 0;
@@ -130,7 +121,6 @@
             letter-spacing: 1px;
         }
         
-        /* Header Section */
         .header {
             height: 180px;
             background: var(--header-bg);
@@ -177,7 +167,6 @@
             transform: scale(1.05);
         }
 
-        /* Profile Section */
         .profile-section {
             margin-top: -50px;
             padding: 0 20px;
@@ -291,7 +280,6 @@
             color: var(--text-secondary);
         }
 
-        /* Content Section */
         .content-section {
             padding: 20px;
             margin-bottom: 80px;
@@ -312,7 +300,6 @@
             font-size: 1.1rem;
         }
 
-        /* Task Cards */
         .task-card {
             background: var(--card-bg);
             border-radius: var(--border-radius);
@@ -395,7 +382,6 @@
             transition: width 0.5s ease;
         }
 
-        /* Buttons */
         .btn {
             display: block;
             width: 100%;
@@ -452,7 +438,6 @@
             box-shadow: none;
         }
 
-        /* Channel List */
         .channel-list {
             list-style: none;
         }
@@ -524,7 +509,6 @@
             opacity: 0.9;
         }
 
-        /* Input Groups */
         .input-group {
             margin-bottom: 15px;
         }
@@ -572,7 +556,6 @@
              background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
         }
 
-        /* Status Messages */
         .status-message {
             text-align: center;
             margin-top: 15px;
@@ -594,7 +577,6 @@
             border: 1px solid #E64A4A;
         }
 
-        /* Referral Section */
         .referral-container {
             background: var(--input-bg);
             border-radius: var(--border-radius-sm);
@@ -662,7 +644,6 @@
             color: var(--text-secondary);
         }
 
-        /* Referred Users */
         .referred-users {
             margin-top: 15px;
         }
@@ -715,7 +696,6 @@
             opacity: 0.7;
         }
 
-        /* Bottom Navigation */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -766,7 +746,6 @@
             transform: scale(1.08);
         }
 
-        /* Ad Modal */
         .ad-modal-overlay {
             position: fixed;
             top: 0;
@@ -833,7 +812,6 @@
             font-size: 0.9rem;
         }
 
-        /* Developer Footer */
         .developer-footer {
             text-align: center;
             padding: 12px;
@@ -842,13 +820,6 @@
             margin-top: 20px;
         }
 
-        .developer-link {
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        /* Toast Notification */
         .toast {
             position: fixed;
             bottom: 80px;
@@ -870,7 +841,6 @@
             bottom: 90px;
         }
 
-        /* Responsive Adjustments */
         @media (max-width: 480px) {
             .profile-card {
                 padding: 70px 15px 15px;
@@ -885,48 +855,19 @@
                 font-size: 1.5rem;
             }
         }
-
-        /* Admin Panel Styles */
-        #admin-login-view, #admin-dashboard {
-            display: none;
-        }
-        
-        .hidden {
-            display: none !important;
-        }
-        
-        .admin-sidebar { background-color: #1f2937; color: #d1d5db; }
-        .admin-sidebar a { border-left: 3px solid transparent; transition: all 0.2s; }
-        .admin-sidebar a:hover { background-color: #374151; }
-        .admin-sidebar a.active { background-color: #4f46e5; color: white; border-left-color: #818cf8; }
-        .admin-stat-card { background-color: white; border-radius: 0.5rem; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06); }
-        .admin-page { display: none; }
-        .admin-page.active { display: block; animation: fadeIn 0.5s; }
-        .admin-btn { padding: 0.5rem 1rem; border-radius: 0.375rem; font-weight: 600; transition: all 0.2s; }
-        .admin-btn:active { transform: scale(0.95); }
-        .admin-btn-primary { background-color: #4f46e5; color: white; }
-        .admin-btn-primary:hover { background-color: #4338ca; }
-        .admin-btn-success { background-color: #10b981; color: white; }
-        .admin-btn-danger { background-color: #ef4444; color: white; }
-        .admin-btn-warning { background-color: #f59e0b; color: white; }
-        .admin-table { width: 100%; border-collapse: collapse; }
-        .admin-table th, .admin-table td { padding: 0.75rem; text-align: left; border-bottom: 1px solid #e5e7eb; }
-        .admin-table th { background-color: #f9fafb; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
     <div id="loadingPage">
         <div class="loading-spinner"></div>
-        <div class="loading-text">Loading App... Please Wait (6s)</div>
+        <div class="loading-text">Loading App...</div>
     </div>
-    
     <div class="app-container" style="display: none;">
         <div class="header">
             <button class="theme-toggle" id="themeToggle">
                 <i class="fas fa-sun"></i>
             </button>
-            <h1 class="header-title">𝗔𝗗𝗦 𝗧𝗢 𝗘𝗔𝗥𝗡𝗜𝗡𝗚 𝗠𝗢𝗡𝗘𝗬</h1>
+            <h1 class="header-title" id="appTitle">𝗔𝗗𝗦 𝗧𝗢 𝗘𝗔𝗥𝗡𝗜𝗡𝗚 𝗠𝗢𝗡𝗘𝗬</h1>
         </div>
 
         <div class="profile-section">
@@ -959,7 +900,9 @@
             </div>
         </div>
 
-        <div class="content-section" id="mainContent"></div>
+        <div class="content-section" id="mainContent">
+            <!-- Content will be loaded here -->
+        </div>
 
         <div class="bottom-nav">
             <a href="#" class="nav-item active" data-page="home">
@@ -996,215 +939,42 @@
         <div class="toast" id="toast"></div>
     </div>
 
-    <!-- Admin Login View -->
-    <div id="admin-login-view" class="min-h-screen flex items-center justify-center bg-gray-100 hidden">
-        <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
-            <h1 class="text-3xl font-bold text-center text-gray-900">Admin Panel Login</h1>
-            <input id="admin-email" type="email" placeholder="Admin Email" class="w-full px-4 py-2 border rounded-lg">
-            <input id="admin-password" type="password" placeholder="Password" class="w-full px-4 py-2 border rounded-lg">
-            <button id="admin-login-btn" class="w-full admin-btn admin-btn-primary">Login</button>
-        </div>
-    </div>
-
-    <!-- Admin Dashboard -->
-    <div id="admin-dashboard" class="hidden">
-        <div class="flex h-screen">
-            <aside class="admin-sidebar w-64 flex-shrink-0">
-                <div class="p-4 text-2xl font-bold text-white">CashReward Admin</div>
-                <nav class="mt-8">
-                    <a href="#" class="nav-link block py-3 px-4 active" data-page="admin-dashboard-page">
-                        <i data-lucide="home" class="inline-block w-5 h-5 mr-2"></i>Dashboard
-                    </a>
-                    <a href="#" class="nav-link block py-3 px-4" data-page="admin-users-page">
-                        <i data-lucide="users" class="inline-block w-5 h-5 mr-2"></i>Users
-                    </a>
-                    <a href="#" class="nav-link block py-3 px-4" data-page="admin-withdrawals-page">
-                        <i data-lucide="dollar-sign" class="inline-block w-5 h-5 mr-2"></i>Withdrawals
-                    </a>
-                    <a href="#" class="nav-link block py-3 px-4" data-page="admin-notifications-page">
-                        <i data-lucide="send" class="inline-block w-5 h-5 mr-2"></i>Notifications
-                    </a>
-                    <a href="#" class="nav-link block py-3 px-4" data-page="admin-settings-page">
-                        <i data-lucide="settings" class="inline-block w-5 h-5 mr-2"></i>Settings
-                    </a>
-                    <a href="#" id="admin-logout-btn" class="block py-3 px-4 mt-8">
-                        <i data-lucide="log-out" class="inline-block w-5 h-5 mr-2"></i>Logout
-                    </a>
-                </nav>
-            </aside>
-
-            <main class="flex-1 p-8 overflow-y-auto">
-                <div id="admin-dashboard-page" class="admin-page active">
-                    <h1 class="text-3xl font-bold mb-6">Dashboard</h1>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div class="admin-stat-card p-6">
-                            <h2 class="text-gray-500 text-lg">Total Users</h2>
-                            <p id="total-users" class="text-4xl font-bold mt-2">0</p>
-                        </div>
-                        <div class="admin-stat-card p-6">
-                            <h2 class="text-gray-500 text-lg">Pending Withdrawals</h2>
-                            <p id="pending-withdrawals" class="text-4xl font-bold mt-2">0</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="admin-users-page" class="admin-page">
-                    <h1 class="text-3xl font-bold mb-6">User Management</h1>
-                    <div class="bg-white shadow rounded-lg overflow-x-auto">
-                        <table class="admin-table min-w-full">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Email/Telegram</th>
-                                    <th>Balance</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="users-table-body"></tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div id="admin-withdrawals-page" class="admin-page">
-                    <h1 class="text-3xl font-bold mb-6">Withdrawal Requests</h1>
-                    <div class="bg-white shadow rounded-lg overflow-x-auto">
-                        <table class="admin-table">
-                            <thead>
-                                <tr>
-                                    <th>User Name</th>
-                                    <th>Amount</th>
-                                    <th>Method</th>
-                                    <th>Details</th>
-                                    <th>Request Time</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="withdrawals-table-body"></tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div id="admin-notifications-page" class="admin-page">
-                    <h1 class="text-3xl font-bold mb-6">Send Notification</h1>
-                    <div class="admin-stat-card p-6 max-w-lg">
-                        <div class="mb-4">
-                            <label for="notification-title" class="block font-semibold mb-2">Title</label>
-                            <input type="text" id="notification-title" class="w-full px-4 py-2 border rounded-lg">
-                        </div>
-                        <div class="mb-6">
-                            <label for="notification-message" class="block font-semibold mb-2">Message</label>
-                            <textarea id="notification-message" rows="4" class="w-full px-4 py-2 border rounded-lg"></textarea>
-                        </div>
-                        <button id="send-notification-btn" class="admin-btn admin-btn-primary">Send to All Users</button>
-                    </div>
-                </div>
-
-                <div id="admin-settings-page" class="admin-page">
-                    <h1 class="text-3xl font-bold mb-6">App Settings</h1>
-                    <div class="admin-stat-card p-6 max-w-lg">
-                        <div class="mb-6">
-                            <label for="min-withdrawal" class="block font-semibold mb-2">Minimum Withdrawal (৳ Taka)</label>
-                            <input type="number" id="min-withdrawal" class="w-full px-4 py-2 border rounded-lg">
-                        </div>
-                        <div class="mb-6">
-                            <label for="daily-ad-limit" class="block font-semibold mb-2">Daily Ad Limit</label>
-                            <input type="number" id="daily-ad-limit" class="w-full px-4 py-2 border rounded-lg">
-                        </div>
-                        <div class="mb-6">
-                            <label for="ad-reward-points" class="block font-semibold mb-2">Reward Per Ad (৳ Taka)</label>
-                            <input type="number" id="ad-reward-points" class="w-full px-4 py-2 border rounded-lg">
-                        </div>
-                        <div class="mb-6">
-                            <label for="ref-withdraw-count" class="block font-semibold mb-2">Referrals Required for Withdrawal</label>
-                            <input type="number" id="ref-withdraw-count" class="w-full px-4 py-2 border rounded-lg">
-                        </div>
-                        <div class="mb-6">
-                            <label for="ref-bonus-referrer" class="block font-semibold mb-2">Referrer Bonus (৳ Taka)</label>
-                            <input type="number" id="ref-bonus-referrer" class="w-full px-4 py-2 border rounded-lg">
-                        </div>
-                        <div class="mb-6">
-                            <label for="ref-bonus-referee" class="block font-semibold mb-2">Referee Bonus (৳ Taka)</label>
-                            <input type="number" id="ref-bonus-referee" class="w-full px-4 py-2 border rounded-lg">
-                        </div>
-                        <div class="mb-6">
-                            <label class="block font-semibold mb-2">Payment Methods (comma separated)</label>
-                            <input type="text" id="payment-methods" class="w-full px-4 py-2 border rounded-lg" placeholder="e.g: bKash, Nagad, Rocket">
-                        </div>
-                        <button id="save-settings-btn" class="admin-btn admin-btn-primary">Save Settings</button>
-                    </div>
-                </div>
-            </main>
-        </div>
-    </div>
-
-    <!-- Alert and Confirm Modals -->
-    <div id="custom-alert" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-lg p-6 w-full max-w-sm text-center shadow-xl">
-            <p id="alert-message" class="mb-4 text-gray-800"></p>
-            <button id="alert-ok-btn" class="admin-btn admin-btn-primary px-6">OK</button>
-        </div>
-    </div>
-
-    <div id="custom-confirm" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-lg p-6 w-full max-w-sm text-center shadow-xl">
-            <p id="confirm-message" class="mb-6 text-gray-800"></p>
-            <div class="flex justify-center space-x-4">
-                <button id="confirm-cancel-btn" class="admin-btn bg-gray-200 text-gray-800 px-6">Cancel</button>
-                <button id="confirm-ok-btn" class="admin-btn admin-btn-danger px-6">Confirm</button>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // Configuration
-        const APP_NAME = "Ads to Earning25";
-        const ADS_PER_DAY_LIMIT = 20;
-        const POINTS_PER_AD = 6;
-        const MIN_WITHDRAW_POINTS = 600;
-        const REFERRAL_BONUS_REFERRER = 10;
-        const REFERRAL_BONUS_REFEREE = 5;
-        const WITHDRAWAL_REFERRAL_COUNT = 14;
-        const MONETAG_AD_FUNCTION_NAME = 'show_9490059'; 
-        const TELEGRAM_BOT_TOKEN = "7354534121:AAHssrmmk3zam5STFXWnOjNRqKyexOjXvmE"; 
-        const TELEGRAM_CHAT_ID = "-1002783990004"; 
-        const REFERRAL_BOT_LINK = "https://t.me/Ads_to_Earning25_bot"; 
+        // Firebase Configuration (YOUR FIREBASE CONFIG)
+        const firebaseConfig = {
+            apiKey: "AIzaSyASMBf-fL9tJOj2sgKdpVK77TYRMga1bag",
+            authDomain: "money-host-56ee9.firebaseapp.com",
+            projectId: "money-host-56ee9",
+            storageBucket: "money-host-56ee9.firebasestorage.app",
+            messagingSenderId: "701262930342",
+            appId: "1:701262930342:web:d992e12673ceba55ff2f67"
+        };
 
-        const BONUS_CHANNELS = [
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Default Configuration (will be overridden by Firebase)
+        let APP_NAME = "Ads to Earning Money";
+        let ADS_PER_DAY_LIMIT = 20;
+        let POINTS_PER_AD = 6;
+        let MIN_WITHDRAW_POINTS = 600;
+        let REFERRAL_BONUS_REFERRER = 10;
+        let REFERRAL_BONUS_REFEREE = 5;
+        let WITHDRAWAL_REFERRAL_COUNT = 14;
+        let MONETAG_ZONE_ID = '9490059';
+        let MONETAG_AD_FUNCTION_NAME = 'show_9490059';
+        let TELEGRAM_BOT_TOKEN = "7354534121:AAHssrmmk3zam5STFXWnOjNRqKyexOjXvmE";
+        let TELEGRAM_CHAT_ID = "-1002783990004";
+        let REFERRAL_BOT_LINK = "https://t.me/Ads_to_Earning25_bot";
+        
+        // Bonus Channels (will be loaded from Firebase)
+        let BONUS_CHANNELS = [
             { id: 'tg_official_channel', name: 'Official Channel', link: '', reward: 5, icon: 'fab fa-telegram-plane' },
             { id: 'tg_support_group', name: 'Support Group', link: '', reward: 5, icon: 'fas fa-headset' },
             { id: 'tg_community', name: 'Telegram Community', link: "", reward: 5, icon: 'fab fa-telegram' },
             { id: 'wa_community', name: 'Youtube Community', link: "", reward: 10, icon: 'fab fa-youtube' }
         ];
-
-        // Firebase Configuration
-        const FIREBASE_CONFIG = {
-            apiKey: "AIzaSyASMBf-fL9tJOj2sgKdpVK77TYRMga1bag",
-            authDomain: "money-host-56ee9.firebaseapp.com",
-            databaseURL: "https://money-host-56ee9-default-rtdb.firebaseio.com",
-            projectId: "money-host-56ee9",
-            storageBucket: "money-host-56ee9.appspot.com",
-            messagingSenderId: "701262930342",
-            appId: "1:701262930342:web:d992e12673ceba55ff2f67"
-        };
-        
-        const ADMIN_UIDS = ["3jTr4Bc6bAbfBaMgJvBzniJPMWq1"];
-
-        // Global variables
-        let GLOBAL_CONFIG = {
-            ADS_PER_DAY_LIMIT: ADS_PER_DAY_LIMIT,
-            POINTS_PER_AD: POINTS_PER_AD,
-            MIN_WITHDRAW_POINTS: MIN_WITHDRAW_POINTS,
-            REFERRAL_BONUS_REFERRER: REFERRAL_BONUS_REFERRER,
-            REFERRAL_BONUS_REFEREE: REFERRAL_BONUS_REFEREE,
-            WITHDRAWAL_REFERRAL_COUNT: WITHDRAWAL_REFERRAL_COUNT,
-            PAYMENT_METHODS: ["Bkash", "Nagad"]
-        };
-
-        // Initialize Firebase
-        const app = firebase.initializeApp(FIREBASE_CONFIG);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
 
         // DOM Elements
         const loadingPage = document.getElementById('loadingPage');
@@ -1225,12 +995,12 @@
         const adStatusMessage = document.getElementById('adStatusMessage');
         const adCloseBtn = document.getElementById('adCloseBtn');
         const toast = document.getElementById('toast');
+        const appTitle = document.getElementById('appTitle');
 
         // Current user state
         let currentUser = {
             name: 'Loading...',
             telegramId: null,
-            userId: null,
             photoUrl: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
             points: 0,
             adsWatchedToday: 0,
@@ -1239,12 +1009,184 @@
             claimedBonuses: [],
             referralCode: '',
             referredBy: null,
-            referredUsers: []
+            referredUsers: [],
+            userId: null,
+            createdAt: new Date()
         };
 
-        let userDocRef = null;
+        // Firebase real-time listener for settings
+        let settingsUnsubscribe = null;
 
-        // === UTILITY FUNCTIONS ===
+        // Load settings from Firebase
+        async function loadSettingsFromFirebase() {
+            try {
+                console.log("Loading settings from Firebase...");
+                
+                const settingsDoc = await db.collection('settings').doc('app_config').get();
+                
+                if (settingsDoc.exists) {
+                    const settings = settingsDoc.data();
+                    console.log("Settings loaded:", settings);
+                    
+                    // Update all settings from Firebase
+                    APP_NAME = settings.APP_NAME || APP_NAME;
+                    ADS_PER_DAY_LIMIT = settings.ADS_PER_DAY_LIMIT || ADS_PER_DAY_LIMIT;
+                    POINTS_PER_AD = settings.POINTS_PER_AD || POINTS_PER_AD;
+                    MIN_WITHDRAW_POINTS = settings.MIN_WITHDRAW_POINTS || MIN_WITHDRAW_POINTS;
+                    REFERRAL_BONUS_REFERRER = settings.REFERRAL_BONUS_REFERRER || REFERRAL_BONUS_REFERRER;
+                    REFERRAL_BONUS_REFEREE = settings.REFERRAL_BONUS_REFEREE || REFERRAL_BONUS_REFEREE;
+                    WITHDRAWAL_REFERRAL_COUNT = settings.WITHDRAWAL_REFERRAL_COUNT || WITHDRAWAL_REFERRAL_COUNT;
+                    TELEGRAM_BOT_TOKEN = settings.TELEGRAM_BOT_TOKEN || TELEGRAM_BOT_TOKEN;
+                    TELEGRAM_CHAT_ID = settings.TELEGRAM_CHAT_ID || TELEGRAM_CHAT_ID;
+                    REFERRAL_BOT_LINK = settings.REFERRAL_BOT_LINK || REFERRAL_BOT_LINK;
+                    MONETAG_ZONE_ID = settings.MONETAG_ZONE_ID || MONETAG_ZONE_ID;
+                    MONETAG_AD_FUNCTION_NAME = `show_${MONETAG_ZONE_ID}`;
+                    
+                    // Load bonus channels
+                    if (settings.BONUS_CHANNELS && Array.isArray(settings.BONUS_CHANNELS)) {
+                        BONUS_CHANNELS = settings.BONUS_CHANNELS;
+                    }
+                    
+                    // Update UI
+                    appTitle.textContent = APP_NAME;
+                    updateUI();
+                    
+                    console.log("Settings updated successfully");
+                    showToast("Settings loaded from server");
+                    
+                    // If we're on a page that needs refresh, refresh it
+                    const currentPage = document.querySelector('.nav-item.active')?.dataset.page;
+                    if (currentPage) {
+                        navigateTo(currentPage);
+                    }
+                } else {
+                    console.log("No settings found in Firebase, using defaults");
+                    // Create default settings in Firebase
+                    await saveDefaultSettingsToFirebase();
+                }
+                
+                // Set up real-time listener for settings changes
+                setupSettingsListener();
+                
+            } catch (error) {
+                console.error("Error loading settings from Firebase:", error);
+                showToast("Using default settings");
+            }
+        }
+
+        // Save default settings to Firebase
+        async function saveDefaultSettingsToFirebase() {
+            try {
+                const defaultSettings = {
+                    APP_NAME: APP_NAME,
+                    ADS_PER_DAY_LIMIT: ADS_PER_DAY_LIMIT,
+                    POINTS_PER_AD: POINTS_PER_AD,
+                    MIN_WITHDRAW_POINTS: MIN_WITHDRAW_POINTS,
+                    REFERRAL_BONUS_REFERRER: REFERRAL_BONUS_REFERRER,
+                    REFERRAL_BONUS_REFEREE: REFERRAL_BONUS_REFEREE,
+                    WITHDRAWAL_REFERRAL_COUNT: WITHDRAWAL_REFERRAL_COUNT,
+                    TELEGRAM_BOT_TOKEN: TELEGRAM_BOT_TOKEN,
+                    TELEGRAM_CHAT_ID: TELEGRAM_CHAT_ID,
+                    REFERRAL_BOT_LINK: REFERRAL_BOT_LINK,
+                    MONETAG_ZONE_ID: MONETAG_ZONE_ID,
+                    BONUS_CHANNELS: BONUS_CHANNELS,
+                    updatedAt: new Date(),
+                    updatedBy: 'system'
+                };
+                
+                await db.collection('settings').doc('app_config').set(defaultSettings);
+                console.log("Default settings saved to Firebase");
+            } catch (error) {
+                console.error("Error saving default settings:", error);
+            }
+        }
+
+        // Set up real-time listener for settings changes
+        function setupSettingsListener() {
+            if (settingsUnsubscribe) {
+                settingsUnsubscribe();
+            }
+            
+            settingsUnsubscribe = db.collection('settings').doc('app_config')
+                .onSnapshot((doc) => {
+                    if (doc.exists) {
+                        const settings = doc.data();
+                        console.log("Settings updated in real-time:", settings);
+                        
+                        // Update settings
+                        APP_NAME = settings.APP_NAME || APP_NAME;
+                        ADS_PER_DAY_LIMIT = settings.ADS_PER_DAY_LIMIT || ADS_PER_DAY_LIMIT;
+                        POINTS_PER_AD = settings.POINTS_PER_AD || POINTS_PER_AD;
+                        MIN_WITHDRAW_POINTS = settings.MIN_WITHDRAW_POINTS || MIN_WITHDRAW_POINTS;
+                        REFERRAL_BONUS_REFERRER = settings.REFERRAL_BONUS_REFERRER || REFERRAL_BONUS_REFERRER;
+                        REFERRAL_BONUS_REFEREE = settings.REFERRAL_BONUS_REFEREE || REFERRAL_BONUS_REFEREE;
+                        WITHDRAWAL_REFERRAL_COUNT = settings.WITHDRAWAL_REFERRAL_COUNT || WITHDRAWAL_REFERRAL_COUNT;
+                        
+                        // Load bonus channels
+                        if (settings.BONUS_CHANNELS && Array.isArray(settings.BONUS_CHANNELS)) {
+                            BONUS_CHANNELS = settings.BONUS_CHANNELS;
+                        }
+                        
+                        // Update UI
+                        appTitle.textContent = APP_NAME;
+                        updateUI();
+                        
+                        // Refresh current page
+                        const currentPage = document.querySelector('.nav-item.active')?.dataset.page;
+                        if (currentPage) {
+                            navigateTo(currentPage);
+                        }
+                        
+                        showToast("Settings updated from Admin Panel");
+                    }
+                }, (error) => {
+                    console.error("Settings listener error:", error);
+                });
+        }
+
+        // Save user to Firebase
+        async function saveUserToFirebase() {
+            try {
+                let userId = currentUser.userId;
+                if (!userId) {
+                    userId = currentUser.telegramId ? `tg_${currentUser.telegramId}` : `device_${localStorage.getItem('galaxyEarnDeviceId')}`;
+                    currentUser.userId = userId;
+                }
+                
+                const userRef = db.collection('users').doc(userId);
+                await userRef.set({
+                    ...currentUser,
+                    updatedAt: new Date(),
+                    lastActive: new Date()
+                }, { merge: true });
+                
+                return userId;
+            } catch (error) {
+                console.error("Error saving user to Firebase:", error);
+                return null;
+            }
+        }
+
+        // Save withdrawal to Firebase
+        async function saveWithdrawalToFirebase(withdrawalData) {
+            try {
+                const withdrawalRef = await db.collection('withdrawals').add({
+                    ...withdrawalData,
+                    status: 'pending',
+                    createdAt: new Date(),
+                    userId: currentUser.userId,
+                    userName: currentUser.name,
+                    telegramId: currentUser.telegramId
+                });
+                
+                return withdrawalRef.id;
+            } catch (error) {
+                console.error("Error saving withdrawal to Firebase:", error);
+                return null;
+            }
+        }
+
+        // Show toast notification
         function showToast(message, duration = 3000) {
             toast.textContent = message;
             toast.classList.add('show');
@@ -1253,50 +1195,36 @@
             }, duration);
         }
 
+        // Generate a unique device ID
+        function generateDeviceId() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+
+        // Generate a referral code
         function generateReferralCode() {
             return Math.random().toString(36).substring(2, 10).toUpperCase();
         }
 
-        async function fetchAppConfig() {
-            try {
-                const configRef = db.collection("config").doc("main");
-                const docSnap = await configRef.get();
-                if (docSnap.exists()) {
-                    const config = docSnap.data();
-                    GLOBAL_CONFIG.ADS_PER_DAY_LIMIT = config.dailyAdLimit || GLOBAL_CONFIG.ADS_PER_DAY_LIMIT;
-                    GLOBAL_CONFIG.POINTS_PER_AD = config.adRewardPoints || GLOBAL_CONFIG.POINTS_PER_AD;
-                    GLOBAL_CONFIG.MIN_WITHDRAW_POINTS = config.minWithdrawal || GLOBAL_CONFIG.MIN_WITHDRAW_POINTS;
-                    GLOBAL_CONFIG.WITHDRAWAL_REFERRAL_COUNT = config.refWithdrawCount || GLOBAL_CONFIG.WITHDRAWAL_REFERRAL_COUNT;
-                    GLOBAL_CONFIG.REFERRAL_BONUS_REFERRER = config.refBonusReferrer || GLOBAL_CONFIG.REFERRAL_BONUS_REFERRER;
-                    GLOBAL_CONFIG.REFERRAL_BONUS_REFEREE = config.refBonusReferee || GLOBAL_CONFIG.REFERRAL_BONUS_REFEREE;
-                    if (config.paymentMethods && Array.isArray(config.paymentMethods)) {
-                        GLOBAL_CONFIG.PAYMENT_METHODS = config.paymentMethods;
-                    }
-                }
-            } catch (error) {
-                console.error("Error fetching app config:", error);
-                showToast("Could not load latest settings. Using default values.");
-            }
-        }
-
-        // === MAIN APP FUNCTIONS ===
+        // Load user state
         async function loadUserState() {
-            const tgUser = window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe && Telegram.WebApp.initDataUnsafe.user;
-            let userId = null;
+            let deviceId = localStorage.getItem('galaxyEarnDeviceId');
+            if (!deviceId) {
+                deviceId = generateDeviceId();
+                localStorage.setItem('galaxyEarnDeviceId', deviceId);
+            }
 
-            if (tgUser) {
-                // Try to find existing user by telegramId
-                const userQuery = db.collection("users").where("telegramId", "==", tgUser.id);
-                const querySnapshot = await userQuery.get();
-                
-                if (!querySnapshot.empty) {
-                    // Existing user found
-                    const doc = querySnapshot.docs[0];
-                    currentUser = { ...doc.data(), userId: doc.id };
-                    userId = doc.id;
+            let allUsersData = JSON.parse(localStorage.getItem('galaxyEarnAllUsers')) || {};
+
+            if (window.Telegram && Telegram.WebApp && Telegram.WebApp.initDataUnsafe.user) {
+                const tgUser = Telegram.WebApp.initDataUnsafe.user;
+                const existingUser = Object.values(allUsersData).find(user => user.telegramId === tgUser.id);
+
+                if (existingUser) {
+                    currentUser = existingUser;
                 } else {
-                    // Create new user
-                    userId = tgUser.id.toString();
                     currentUser = {
                         name: `${tgUser.first_name || ''} ${tgUser.last_name || ''}`.trim() || `User${tgUser.id}`,
                         telegramId: tgUser.id,
@@ -1309,114 +1237,129 @@
                         referralCode: generateReferralCode(),
                         referredBy: null,
                         referredUsers: [],
-                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                        userId: null,
+                        createdAt: new Date()
                     };
-                    await db.collection("users").doc(userId).set(currentUser);
+                    allUsersData[deviceId] = currentUser;
+                    localStorage.setItem('galaxyEarnAllUsers', JSON.stringify(allUsersData));
                 }
-                
-                userDocRef = db.collection("users").doc(userId);
-                
-                // Set up real-time listener
-                userDocRef.onSnapshot((docSnap) => {
-                    if (docSnap.exists()) {
-                        currentUser = { ...docSnap.data(), userId: docSnap.id };
-                        updateUI();
-                    }
-                });
-
             } else {
-                // Fallback for non-TWA users
-                userId = localStorage.getItem('galaxyEarnGuestId');
-                if (!userId) {
-                    userId = `guest_${generateReferralCode()}`;
-                    localStorage.setItem('galaxyEarnGuestId', userId);
+                if (!allUsersData[deviceId]) {
+                    allUsersData[deviceId] = {
+                        name: 'Guest User',
+                        telegramId: null,
+                        photoUrl: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png',
+                        points: 0,
+                        adsWatchedToday: 0,
+                        totalAdsWatchedLifetime: 0,
+                        lastAdWatchDate: null,
+                        claimedBonuses: [],
+                        referralCode: generateReferralCode(),
+                        referredBy: null,
+                        referredUsers: [],
+                        userId: null,
+                        createdAt: new Date()
+                    };
+                    localStorage.setItem('galaxyEarnAllUsers', JSON.stringify(allUsersData));
                 }
-                
-                let guestData = JSON.parse(localStorage.getItem(`galaxyEarnUser_${userId}`)) || {
-                    name: 'Guest User',
-                    telegramId: null,
-                    userId: userId,
-                    photoUrl: currentUser.photoUrl,
-                    points: 0,
-                    adsWatchedToday: 0,
-                    totalAdsWatchedLifetime: 0,
-                    lastAdWatchDate: null,
-                    claimedBonuses: [],
-                    referralCode: generateReferralCode(),
-                    referredBy: null,
-                    referredUsers: []
-                };
-                currentUser = guestData;
-                showToast("Running in Guest Mode (Local Storage).");
+                currentUser = allUsersData[deviceId];
             }
 
-            // Check for referral code in URL
+            if (currentUser.photoUrl) {
+                profilePic.src = currentUser.photoUrl;
+            }
+
             const urlParams = new URLSearchParams(window.location.search);
             const refCodeFromUrl = urlParams.get('start') || urlParams.get('ref');
 
-            if (refCodeFromUrl && !currentUser.referredBy && refCodeFromUrl !== currentUser.referralCode && userDocRef) {
-                await applyReferral(refCodeFromUrl);
+            if (refCodeFromUrl && !currentUser.referredBy && refCodeFromUrl !== currentUser.referralCode) {
+                const referrerExists = Object.values(allUsersData).some(user => user.referralCode === refCodeFromUrl);
+                if (referrerExists) {
+                    applyReferral(refCodeFromUrl);
+                }
             }
 
+            // Save to Firebase
+            currentUser.userId = await saveUserToFirebase();
+            
             updateUI();
         }
 
-        async function saveUserState() {
-            if (userDocRef) {
-                // Save to Firebase
-                const userDataToSave = { ...currentUser };
-                delete userDataToSave.userId;
-                try {
-                    await userDocRef.update(userDataToSave);
-                } catch (error) {
-                    console.error("Error saving user state:", error);
-                }
-            } else {
-                // Save to Local Storage for guest users
-                localStorage.setItem(`galaxyEarnUser_${currentUser.userId}`, JSON.stringify(currentUser));
-            }
-        }
-
+        // Apply referral code
         async function applyReferral(referrerCode) {
-            if (referrerCode === currentUser.referralCode || currentUser.referredBy || !userDocRef) {
+            if (referrerCode === currentUser.referralCode || currentUser.referredBy) {
                 return;
             }
 
-            // Find referrer by code
-            const referrerQuery = db.collection("users").where("referralCode", "==", referrerCode);
-            const referrerSnapshot = await referrerQuery.get();
-            
-            if (!referrerSnapshot.empty) {
-                const referrerDoc = referrerSnapshot.docs[0];
-                const referrerUser = referrerDoc.data();
-                const referrerRef = db.collection("users").doc(referrerDoc.id);
+            let allUsersData = JSON.parse(localStorage.getItem('galaxyEarnAllUsers')) || {};
+            const referrerUser = Object.values(allUsersData).find(user => user.referralCode === referrerCode);
 
-                // Update current user
-                currentUser.points += GLOBAL_CONFIG.REFERRAL_BONUS_REFEREE;
+            if (referrerUser) {
+                currentUser.points += REFERRAL_BONUS_REFEREE;
                 currentUser.referredBy = referrerCode;
-                await saveUserState();
 
-                // Update referrer
-                const referredUsers = referrerUser.referredUsers || [];
-                if (!referredUsers.includes(currentUser.referralCode)) {
-                    referredUsers.push(currentUser.referralCode);
-                    await referrerRef.update({
-                        points: (referrerUser.points || 0) + GLOBAL_CONFIG.REFERRAL_BONUS_REFERRER,
-                        referredUsers: referredUsers
-                    });
+                referrerUser.points += REFERRAL_BONUS_REFERRER;
+                if (referrerUser.referredUsers) {
+                    referrerUser.referredUsers.push(currentUser.referralCode);
+                } else {
+                    referrerUser.referredUsers = [currentUser.referralCode];
                 }
+
+                const referrerDeviceId = Object.keys(allUsersData).find(id => allUsersData[id].referralCode === referrerCode);
+                if (referrerDeviceId) {
+                    allUsersData[referrerDeviceId] = referrerUser;
+                }
+
+                localStorage.setItem('galaxyEarnAllUsers', JSON.stringify(allUsersData));
                 
-                showToast(`+${GLOBAL_CONFIG.REFERRAL_BONUS_REFEREE} bonus points for joining via referral!`);
-                sendTelegramReferralNotification(
-                    currentUser.name,
-                    currentUser.referralCode,
-                    referrerUser.name,
-                    referrerCode
-                );
+                // Save both users to Firebase
+                await saveUserToFirebase();
+                await saveUserToFirebase(referrerUser);
+                
+                showToast(`+${REFERRAL_BONUS_REFEREE} bonus points for joining via referral!`);
+                updateUI();
             }
         }
 
-        // === THEME MANAGEMENT ===
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', async () => {
+            // 6-second loading screen
+            setTimeout(async () => {
+                loadingPage.style.opacity = '0';
+                setTimeout(() => {
+                    loadingPage.style.display = 'none';
+                    appContainer.style.display = 'block';
+                }, 500);
+                
+                if (window.Telegram && Telegram.WebApp) {
+                    Telegram.WebApp.expand();
+                    Telegram.WebApp.enableClosingConfirmation();
+                }
+                
+                // Load settings from Firebase first
+                await loadSettingsFromFirebase();
+                
+                // Then load user state
+                await loadUserState();
+                
+                applyTheme(localStorage.getItem('galaxyEarnTheme') || 'light');
+                navigateTo('home');
+
+                // Event Listeners
+                themeToggleBtn.addEventListener('click', toggleTheme);
+                editNameBtn.addEventListener('click', promptForNewName);
+                bottomNavItems.forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const page = item.dataset.page;
+                        navigateTo(page);
+                    });
+                });
+                adCloseBtn.addEventListener('click', closeAdModalAndReward);
+            }, 2000);
+        });
+
+        // Theme management
         function applyTheme(theme) {
             document.body.classList.toggle('dark-mode', theme === 'dark');
             themeToggleBtn.innerHTML = theme === 'dark' ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
@@ -1427,7 +1370,7 @@
             applyTheme(document.body.classList.contains('dark-mode') ? 'light' : 'dark');
         }
 
-        // === UI UPDATES ===
+        // Update UI elements
         function updateUI() {
             profileNameDisplay.innerHTML = `
                 ${currentUser.name}
@@ -1436,12 +1379,10 @@
                     <i class="fas fa-pencil-alt"></i>
                 </button>
             `;
-            document.getElementById('editNameBtn').addEventListener('click', promptForNewName);
-
+            
             userPointsDisplay.innerHTML = `<i class="fas fa-money-bill-wave"></i> ৳ ${currentUser.points}`;
-            const adsLeft = GLOBAL_CONFIG.ADS_PER_DAY_LIMIT - currentUser.adsWatchedToday;
             adsWatchedTodayEl.textContent = currentUser.adsWatchedToday;
-            adsLeftTodayEl.textContent = Math.max(0, adsLeft);
+            adsLeftTodayEl.textContent = ADS_PER_DAY_LIMIT - currentUser.adsWatchedToday;
             totalAdsWatchedEl.textContent = currentUser.totalAdsWatchedLifetime;
 
             if (currentUser.photoUrl) {
@@ -1450,8 +1391,7 @@
 
             const watchBtn = document.getElementById('watchDailyAdBtn');
             if (watchBtn) {
-                watchBtn.disabled = (adsLeft <= 0);
-                watchBtn.innerHTML = adsLeft <= 0 ? 'Daily Limit Reached' : `<i class="fas fa-play"></i> Watch Ad & Earn ৳ ${GLOBAL_CONFIG.POINTS_PER_AD}`;
+                watchBtn.disabled = (ADS_PER_DAY_LIMIT - currentUser.adsWatchedToday <= 0);
             }
         }
 
@@ -1465,24 +1405,15 @@
             }
         }
 
-        // === NAVIGATION ===
+        // Navigation function
         function navigateTo(page) {
-            // Hide admin panels if they're showing
-            if (!document.getElementById('admin-dashboard').classList.contains('hidden') || 
-                !document.getElementById('admin-login-view').classList.contains('hidden')) {
-                document.getElementById('admin-dashboard').classList.add('hidden');
-                document.getElementById('admin-login-view').classList.add('hidden');
-                appContainer.style.display = 'block';
+            const currentActiveNavItem = document.querySelector('.bottom-nav .nav-item.active');
+            if (currentActiveNavItem) {
+                currentActiveNavItem.classList.remove('active');
             }
-
-            // Update nav items
-            document.querySelectorAll('.bottom-nav .nav-item.active').forEach(item => {
-                item.classList.remove('active');
-            });
             const activeNavItem = document.querySelector(`.nav-item[data-page="${page}"]`);
             if (activeNavItem) activeNavItem.classList.add('active');
 
-            // Render page
             const pageRenderers = {
                 'home': renderHomePage,
                 'tasks': renderTasksPage,
@@ -1495,19 +1426,19 @@
             updateUI();
         }
 
-        // === PAGE RENDERERS ===
+        // Page renderers
         function renderHomePage() {
             mainContent.innerHTML = `
                 <div class="task-card">
                     <h2 class="section-title">
-                        <i class="fas fa-home"></i> Welcome
+                        <i class="fas fa-home"></i> Welcome to ${APP_NAME}
                     </h2>
                     <p class="task-description">
-                        Welcome to ${APP_NAME}, ${currentUser.name.split(' ')[0]}! Start earning ৳ Taka by completing tasks, watching ads, and inviting friends.
+                        Welcome ${currentUser.name.split(' ')[0]}! Start earning ৳ Taka by completing tasks, watching ads, and inviting friends.
                     </p>
                     <div class="stats-display" style="justify-content: space-between; margin-top: 20px; gap: 8px;">
                         <div class="stat-item" style="flex: 1; margin: 0 4px;">
-                            <div class="stat-value">${GLOBAL_CONFIG.ADS_PER_DAY_LIMIT - currentUser.adsWatchedToday}</div>
+                            <div class="stat-value">${ADS_PER_DAY_LIMIT - currentUser.adsWatchedToday}</div>
                             <div class="stat-label">Ads Left</div>
                         </div>
                         <div class="stat-item" style="flex: 1; margin: 0 4px;">
@@ -1520,19 +1451,14 @@
                         </div>
                     </div>
                 </div>
-                <div style="margin-top: 15px; text-align: center;">
-                    <a href="#" target="_blank" class="btn btn-secondary" onclick="event.preventDefault(); showToast('Channel Link Not Available');">
-                        <i class="fab fa-telegram-plane"></i> Join Our Channel
-                    </a>
-                </div>
                 <div class="developer-footer">
-                    Developed by Floki
+                    App controlled by Admin Panel
                 </div>`;
         }
 
         function renderTasksPage() {
-            const adsLeft = GLOBAL_CONFIG.ADS_PER_DAY_LIMIT - currentUser.adsWatchedToday;
-            const progressPercent = (currentUser.adsWatchedToday / GLOBAL_CONFIG.ADS_PER_DAY_LIMIT) * 100;
+            const adsLeft = ADS_PER_DAY_LIMIT - currentUser.adsWatchedToday;
+            const progressPercent = (currentUser.adsWatchedToday / ADS_PER_DAY_LIMIT) * 100;
             mainContent.innerHTML = `
                 <div class="task-card">
                     <div class="task-header">
@@ -1540,14 +1466,14 @@
                             <i class="fas fa-ad"></i>
                         </div>
                         <div class="task-title">Watch Ads</div>
-                        <div class="reward-badge">+৳ ${GLOBAL_CONFIG.POINTS_PER_AD}</div>
+                        <div class="reward-badge">+৳ ${POINTS_PER_AD}</div>
                     </div>
                     <p class="task-description">
-                        Watch short video ads to earn ৳ Taka. You can watch exactly **${GLOBAL_CONFIG.ADS_PER_DAY_LIMIT} ads per day**. Each ad rewards **৳ ${GLOBAL_CONFIG.POINTS_PER_AD}**.
+                        Watch short video ads to earn ৳ Taka. You can watch exactly <strong>${ADS_PER_DAY_LIMIT} ads per day</strong>. Each ad rewards <strong>৳ ${POINTS_PER_AD}</strong>.
                     </p>
                     <div class="progress-container">
                         <div class="progress-text">
-                            <span>${currentUser.adsWatchedToday}/${GLOBAL_CONFIG.ADS_PER_DAY_LIMIT} watched</span>
+                            <span>${currentUser.adsWatchedToday}/${ADS_PER_DAY_LIMIT} watched</span>
                             <span>${adsLeft} left</span>
                         </div>
                         <div class="progress-bar">
@@ -1555,12 +1481,13 @@
                         </div>
                     </div>
                     <button class="btn btn-primary" id="watchDailyAdBtn" ${adsLeft <= 0 ? 'disabled' : ''}>
-                        <i class="fas fa-play"></i> Watch Ad & Earn ৳ ${GLOBAL_CONFIG.POINTS_PER_AD}
+                        <i class="fas fa-play"></i> Watch Ad & Earn ৳ ${POINTS_PER_AD}
                     </button>
                 </div>
                 <div class="developer-footer">
-                    Developed by Floki
+                    Daily Limit: ${ADS_PER_DAY_LIMIT} ads | Reward: ৳ ${POINTS_PER_AD} per ad
                 </div>`;
+            
             if (adsLeft > 0) {
                 document.getElementById('watchDailyAdBtn').addEventListener('click', handleWatchDailyAd);
             }
@@ -1569,6 +1496,7 @@
         function renderBonusPage() {
             let channelsHtml = BONUS_CHANNELS.map(channel => {
                 const isClaimed = currentUser.claimedBonuses.includes(channel.id);
+                const linkIsValid = channel.link && channel.link !== '#' && channel.link !== '';
                 return `
                     <li class="channel-item">
                         <div class="channel-info">
@@ -1580,9 +1508,14 @@
                                 <div class="channel-reward">+৳ ${channel.reward}</div>
                             </div>
                         </div>
-                        <button class="join-btn ${isClaimed ? 'claimed' : ''}" onclick="handleBonusLinkClick(event, this)" data-channel-id="${channel.id}" data-reward="${channel.reward}" ${isClaimed ? 'disabled' : ''}>
-                            ${isClaimed ? 'Claimed' : 'Join'}
-                        </button>
+                        ${ linkIsValid ?
+                            `<a href="${channel.link}" target="_blank" class="join-btn ${isClaimed ? 'claimed' : ''}" data-channel-id="${channel.id}" data-reward="${channel.reward}" onclick="handleBonusLinkClick(event, this)">
+                                ${isClaimed ? 'Claimed' : 'Join'}
+                            </a>` :
+                            `<button class="join-btn ${isClaimed ? 'claimed' : ''}" onclick="event.preventDefault(); handleBonusLinkClick(event, this);" data-channel-id="${channel.id}" data-reward="${channel.reward}" ${isClaimed ? 'disabled' : ''}>
+                                ${isClaimed ? 'Claimed' : 'Join'}
+                            </button>`
+                        }
                     </li>`;
             }).join('');
 
@@ -1597,24 +1530,22 @@
                     <ul class="channel-list">${channelsHtml}</ul>
                 </div>
                 <div class="developer-footer">
-                    Developed by Floki
+                    Bonus channels controlled by Admin Panel
                 </div>`;
         }
 
         function renderWithdrawPage() {
             const currentReferrals = currentUser.referredUsers ? currentUser.referredUsers.length : 0;
-            const referralNeeded = GLOBAL_CONFIG.WITHDRAWAL_REFERRAL_COUNT - currentReferrals;
-            const canWithdraw = currentReferrals >= GLOBAL_CONFIG.WITHDRAWAL_REFERRAL_COUNT;
+            const referralNeeded = WITHDRAWAL_REFERRAL_COUNT - currentReferrals;
+            const canWithdraw = currentReferrals >= WITHDRAWAL_REFERRAL_COUNT;
             
             let statusMessage = '';
             if (!canWithdraw) {
-                statusMessage = `<p class="error-message"><i class="fas fa-exclamation-triangle"></i> Withdrawal requires **${GLOBAL_CONFIG.WITHDRAWAL_REFERRAL_COUNT}** active referrals. You need **${referralNeeded}** more.</p>`;
+                statusMessage = `<p class="error-message"><i class="fas fa-exclamation-triangle"></i> Withdrawal requires <strong>${WITHDRAWAL_REFERRAL_COUNT}</strong> active referrals. You need <strong>${referralNeeded}</strong> more.</p>`;
             } else {
-                statusMessage = `<p class="success-message"><i class="fas fa-check-circle"></i> Referral requirement met! You have ${currentReferrals}/${GLOBAL_CONFIG.WITHDRAWAL_REFERRAL_COUNT} referrals.</p>`;
+                statusMessage = `<p class="success-message"><i class="fas fa-check-circle"></i> Referral requirement met! You have ${currentReferrals}/${WITHDRAWAL_REFERRAL_COUNT} referrals.</p>`;
             }
             
-            const paymentOptions = GLOBAL_CONFIG.PAYMENT_METHODS.map(method => `<option value="${method}">${method}</option>`).join('');
-
             mainContent.innerHTML = `
                 <div class="task-card">
                     <h2 class="section-title">
@@ -1622,7 +1553,7 @@
                     </h2>
                     ${statusMessage}
                     <p class="task-description">
-                        <b>Convert your ৳ Taka to real money. Minimum withdrawal is ৳ ${GLOBAL_CONFIG.MIN_WITHDRAW_POINTS}.</b>
+                        Convert your ৳ Taka to real money. Minimum withdrawal is <strong>৳ ${MIN_WITHDRAW_POINTS}</strong>.
                     </p>
                     <div class="input-group">
                         <label class="input-label">Amount (৳ Taka)</label>
@@ -1632,12 +1563,14 @@
                         <label class="input-label">Payment Method</label>
                         <select id="withdrawMethodSelect" class="select-field">
                             <option value="">Select method</option>
-                            ${paymentOptions}
+                            <option value="Bkash">Bkash</option>
+                            <option value="Nagad">Nagad</option>
+                            <option value="Rocket">Rocket</option>
                         </select>
                     </div>
                     <div class="input-group">
                         <label class="input-label">Enter your Payment Account Number</label>
-                        <input type="text" id="withdrawAccountInput" class="input-field" placeholder="Enter your number">
+                        <input type="text" id="withdrawAccountInput" class="input-field" placeholder="Enter your Bkash/Nagad/Rocket number">
                     </div>
                     <button class="btn btn-primary" id="submitWithdrawBtn" ${!canWithdraw ? 'disabled' : ''}>
                         <i class="fas fa-paper-plane"></i> Submit Request
@@ -1645,8 +1578,9 @@
                     <p class="status-message" id="withdrawStatusMsg"></p>
                 </div>
                 <div class="developer-footer">
-                    Developed by Floki
+                    Min Withdrawal: ৳ ${MIN_WITHDRAW_POINTS} | Required Referrals: ${WITHDRAWAL_REFERRAL_COUNT}
                 </div>`;
+            
             document.getElementById('submitWithdrawBtn').addEventListener('click', handleSubmitWithdrawal);
         }
 
@@ -1659,23 +1593,21 @@
                 referredUsersListHtml = `
                     <h3 style="margin: 20px 0 10px; font-size: 1rem; color: var(--text-secondary);">Your Referrals (${referredUsersCount})</h3>
                     <div class="referred-users">`;
-                
-                for (let i = 0; i < Math.min(5, referredUsersCount); i++) {
+                const allUsersData = JSON.parse(localStorage.getItem('galaxyEarnAllUsers')) || {};
+                currentUser.referredUsers.forEach(refCode => {
+                    const referredUser = Object.values(allUsersData).find(user => user.referralCode === refCode);
+                    const name = referredUser ? referredUser.name : `User ${refCode}`;
                     referredUsersListHtml += `
                         <div class="user-item">
                             <div class="user-avatar">
                                 <i class="fas fa-user"></i>
                             </div>
                             <div class="user-info">
-                                <div class="user-name">Referred User ${i + 1}</div>
-                                <div class="user-code">****</div>
+                                <div class="user-name">${name}</div>
+                                <div class="user-code">${refCode}</div>
                             </div>
                         </div>`;
-                }
-                
-                if (referredUsersCount > 5) {
-                    referredUsersListHtml += `<p class="text-center text-xs text-gray-500 mt-2">...and ${referredUsersCount - 5} more</p>`;
-                }
+                });
                 referredUsersListHtml += `</div>`;
             } else {
                 referredUsersListHtml = `
@@ -1692,7 +1624,9 @@
                         <i class="fas fa-share-alt"></i> Refer & Earn
                     </h2>
                     <p class="task-description">
-                        Invite friends and earn ৳ ${GLOBAL_CONFIG.REFERRAL_BONUS_REFERRER} for each successful referral. They'll get ৳ ${GLOBAL_CONFIG.REFERRAL_BONUS_REFEREE} too! **(Withdrawal requires ${GLOBAL_CONFIG.WITHDRAWAL_REFERRAL_COUNT} referrals)**
+                        Invite friends and earn <strong>৳ ${REFERRAL_BONUS_REFERRER}</strong> for each successful referral. They'll get <strong>৳ ${REFERRAL_BONUS_REFEREE}</strong> too! 
+                        <br><br>
+                        <strong>Withdrawal requires ${WITHDRAWAL_REFERRAL_COUNT} referrals.</strong>
                     </p>
                     <div class="referral-container">
                         <label class="input-label">Your Referral Code</label>
@@ -1711,7 +1645,7 @@
                     </div>
                     <div class="referral-stats">
                         <div class="stat-card">
-                            <div class="stat-number">৳ ${GLOBAL_CONFIG.REFERRAL_BONUS_REFERRER}</div>
+                            <div class="stat-number">৳ ${REFERRAL_BONUS_REFERRER}</div>
                             <div class="stat-title">Per Referral</div>
                         </div>
                         <div class="stat-card">
@@ -1719,14 +1653,14 @@
                             <div class="stat-title">Total</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-number">৳ ${referredUsersCount * GLOBAL_CONFIG.REFERRAL_BONUS_REFERRER}</div>
+                            <div class="stat-number">৳ ${referredUsersCount * REFERRAL_BONUS_REFERRER}</div>
                             <div class="stat-title">Earned</div>
                         </div>
                     </div>
                     ${referredUsersListHtml}
                 </div>
                 <div class="developer-footer">
-                    Developed by Floki
+                    Referrer Bonus: ৳ ${REFERRAL_BONUS_REFERRER} | Referee Bonus: ৳ ${REFERRAL_BONUS_REFEREE}
                 </div>`;
 
             document.getElementById('copyReferralCodeBtn').addEventListener('click', () => {
@@ -1759,7 +1693,7 @@
             });
         }
 
-        // === AD HANDLING ===
+        // Ad handling
         let adWatchedSuccessfully = false;
         let adRewardPending = false;
 
@@ -1771,7 +1705,7 @@
                 await saveUserState();
             }
 
-            if (currentUser.adsWatchedToday >= GLOBAL_CONFIG.ADS_PER_DAY_LIMIT) {
+            if (currentUser.adsWatchedToday >= ADS_PER_DAY_LIMIT) {
                 showToast("Daily ad limit reached!");
                 updateUI();
                 return;
@@ -1784,19 +1718,51 @@
             adCloseBtn.style.display = 'none';
             adStatusMessage.textContent = "Please wait while we load the ad";
 
-            // Simulate ad watching since Monetag might not be available
-            showToast("Ad service not fully integrated. Simulating ad watch...");
-            adModalTitle.textContent = "Simulating Ad...";
-            adStatusMessage.textContent = "Ad will finish in 5 seconds (simulation).";
-            
-            setTimeout(() => {
-                if (adRewardPending) {
-                    adSpinner.style.display = 'none';
-                    adStatusMessage.textContent = "Simulated ad completed! Close to claim your reward";
-                    adCloseBtn.style.display = 'block';
-                    adWatchedSuccessfully = true;
+            // Monetag ad integration
+            if (MONETAG_AD_FUNCTION_NAME && typeof window[MONETAG_AD_FUNCTION_NAME] === 'function') {
+                try {
+                    const adPromise = window[MONETAG_AD_FUNCTION_NAME]();
+                    if (adPromise && typeof adPromise.then === 'function') {
+                        adModalTitle.textContent = "Ad Playing";
+                        adStatusMessage.textContent = "Please watch the full ad to claim your reward";
+                        adPromise.then(() => {
+                            adWatchedSuccessfully = true;
+                            if (adRewardPending) {
+                                adSpinner.style.display = 'none';
+                                adStatusMessage.textContent = "Ad completed! Close to claim your reward";
+                                adCloseBtn.style.display = 'block';
+                            }
+                        }).catch(error => {
+                            handleAdError("Ad closed too soon or error occurred. No Taka awarded.");
+                            console.error("Monetag ad error:", error);
+                        });
+                    } else {
+                        setTimeout(() => {
+                            if (adRewardPending) {
+                                adSpinner.style.display = 'none';
+                                adStatusMessage.textContent = "Ad completed! Close to claim your reward";
+                                adCloseBtn.style.display = 'block';
+                                adWatchedSuccessfully = true;
+                            }
+                        }, 7000);
+                    }
+                } catch (error) {
+                    handleAdError("Error loading ad. Please try again.");
+                    console.error("Monetag ad execution error:", error);
                 }
-            }, 5000);
+            } else {
+                // Simulation
+                adModalTitle.textContent = "Simulating Ad...";
+                adStatusMessage.textContent = "Ad will finish in 5 seconds (simulation).";
+                setTimeout(() => {
+                    if (adRewardPending) {
+                        adSpinner.style.display = 'none';
+                        adStatusMessage.textContent = "Simulated ad completed! Close to claim your reward";
+                        adCloseBtn.style.display = 'block';
+                        adWatchedSuccessfully = true;
+                    }
+                }, 5000);
+            }
         }
 
         function handleAdError(errorMessage) {
@@ -1820,12 +1786,13 @@
         async function closeAdModalAndReward() {
             adModal.classList.remove('show');
             if (adWatchedSuccessfully && adRewardPending) {
-                currentUser.points += GLOBAL_CONFIG.POINTS_PER_AD;
+                currentUser.points += POINTS_PER_AD;
                 currentUser.adsWatchedToday++;
                 currentUser.totalAdsWatchedLifetime++;
                 currentUser.lastAdWatchDate = new Date().toLocaleDateString();
+                updateUI();
                 await saveUserState();
-                showToast(`+৳ ${GLOBAL_CONFIG.POINTS_PER_AD} earned!`);
+                showToast(`+৳ ${POINTS_PER_AD} earned!`);
             } else if (adRewardPending && !adWatchedSuccessfully) {
                 showToast("Ad not completed. No Taka awarded.");
             }
@@ -1833,10 +1800,11 @@
             adWatchedSuccessfully = false;
         }
 
-        // === BONUS HANDLING ===
+        // Bonus channel handling
         async function handleBonusLinkClick(event, buttonElement) {
             const channelId = buttonElement.dataset.channelId;
             const reward = parseInt(buttonElement.dataset.reward);
+            const link = buttonElement.href;
             const isClaimed = currentUser.claimedBonuses.includes(channelId);
 
             if (isClaimed) {
@@ -1845,7 +1813,12 @@
             }
 
             event.preventDefault();
-            showToast("No active link for this bonus. Claiming after a brief wait.", 5000);
+            
+            if (link && link !== '#' && link !== '') {
+                window.open(link, '_blank');
+            } else {
+                showToast("No active link for this bonus. Claiming after a brief wait.", 5000);
+            }
 
             buttonElement.textContent = 'Verifying...';
             buttonElement.disabled = true;
@@ -1854,19 +1827,20 @@
                 if (!currentUser.claimedBonuses.includes(channelId)) {
                     currentUser.points += reward;
                     currentUser.claimedBonuses.push(channelId);
+                    updateUI();
                     await saveUserState();
                     buttonElement.textContent = 'Claimed';
                     buttonElement.classList.add('claimed');
                     showToast(`+৳ ${reward} bonus claimed!`);
                 } else {
-                    buttonElement.textContent = 'Claimed';
-                    buttonElement.classList.add('claimed');
+                     buttonElement.textContent = 'Claimed';
+                     buttonElement.classList.add('claimed');
                 }
                 buttonElement.disabled = false;
             }, 7000);
         }
 
-        // === WITHDRAWAL HANDLING ===
+        // Withdrawal handling
         async function handleSubmitWithdrawal() {
             const amount = parseInt(document.getElementById('withdrawAmountInput').value);
             const method = document.getElementById('withdrawMethodSelect').value;
@@ -1877,16 +1851,10 @@
             statusMsg.className = 'status-message';
             statusMsg.textContent = '';
 
-            if (!currentUser.telegramId || !userDocRef) {
-                statusMsg.textContent = `Please launch the app via Telegram to submit a withdrawal.`;
-                statusMsg.classList.add('error-message');
-                return;
-            }
-
-            if (currentReferrals < GLOBAL_CONFIG.WITHDRAWAL_REFERRAL_COUNT) {
-                statusMsg.textContent = `You must have ${GLOBAL_CONFIG.WITHDRAWAL_REFERRAL_COUNT} referrals to withdraw. You have ${currentReferrals}.`;
-                statusMsg.classList.add('error-message');
-                return;
+            if (currentReferrals < WITHDRAWAL_REFERRAL_COUNT) {
+                 statusMsg.textContent = `You must have ${WITHDRAWAL_REFERRAL_COUNT} referrals to withdraw. You have ${currentReferrals}.`;
+                 statusMsg.classList.add('error-message');
+                 return;
             }
 
             if (isNaN(amount) || amount <= 0) {
@@ -1894,8 +1862,8 @@
                 statusMsg.classList.add('error-message');
                 return;
             }
-            if (amount < GLOBAL_CONFIG.MIN_WITHDRAW_POINTS) {
-                statusMsg.textContent = `Minimum withdrawal is ৳ ${GLOBAL_CONFIG.MIN_WITHDRAW_POINTS}.`;
+            if (amount < MIN_WITHDRAW_POINTS) {
+                statusMsg.textContent = `Minimum withdrawal is ৳ ${MIN_WITHDRAW_POINTS}.`;
                 statusMsg.classList.add('error-message');
                 return;
             }
@@ -1920,408 +1888,43 @@
             updateUI();
             await saveUserState();
 
-            // Add withdrawal request
-            try {
-                await db.collection("withdrawals").add({
-                    userId: currentUser.userId,
-                    userName: currentUser.name,
-                    telegramId: currentUser.telegramId,
-                    amount: amount,
-                    method: method,
-                    paymentDetail: account,
-                    status: 'pending',
-                    requestedAt: firebase.firestore.FieldValue.serverTimestamp()
-                });
-            } catch(error) {
-                console.error("Error creating withdrawal request:", error);
-            }
-
-            const escapeMarkdown = (text) => {
-                return text.replace(/([_*\[\]()~`>#+\-=|{}.!])/g, '\\$1');
-            };
-
-            const withdrawalDetails = `
-🔔 *New Withdrawal Request* 🔔
-------------------------------------
-🕵️ *App Name:* \`${escapeMarkdown(APP_NAME)}\`
-👤 *User Name:* \`${escapeMarkdown(currentUser.name)}\`
-💰 *Amount:* ৳ ${amount}
-💳 *Method:* ${escapeMarkdown(method)}
-🏦 *Account:* \`${escapeMarkdown(account)}\`
-------------------------------------
-📊 *Referrals:* ${currentReferrals}/${GLOBAL_CONFIG.WITHDRAWAL_REFERRAL_COUNT}
-♎ Main Balance: ৳ ${currentUser.points}
-👀 Total Ads Watched: ${currentUser.totalAdsWatchedLifetime}
-------------------------------------
-⏰ *Withdrawal Time:* ${new Date().toLocaleString('en-GB', { timeZone: 'Asia/Dhaka' })}
-            `;
-
-            sendToTelegram(withdrawalDetails);
-
-            statusMsg.textContent = "Withdrawal request submitted successfully! Payment will be processed shortly.";
-            statusMsg.classList.add('success-message');
-            document.getElementById('withdrawAmountInput').value = "";
-            document.getElementById('withdrawMethodSelect').value = "";
-            document.getElementById('withdrawAccountInput').value = "";
-        }
-
-        // === TELEGRAM FUNCTIONS ===
-        function sendToTelegram(message) {
-            if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
-                console.warn("Telegram Bot not configured. Message not sent.");
-                return;
-            }
-
-            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    chat_id: TELEGRAM_CHAT_ID,
-                    text: message,
-                    parse_mode: 'MarkdownV2'
-                })
-            })
-            .catch(error => console.error('Error sending Telegram message:', error));
-        }
-
-        function sendTelegramReferralNotification(refereeName, refereeCode, referrerName, referrerCode) {
-            if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
-                console.warn("Telegram Bot for referral notification not configured.");
-                return;
-            }
-
-            const escapeMarkdown = (text) => {
-                return text.replace(/([_*\[\]()~`>#+\-=|{}.!])/g, '\\$1');
-            };
-
-            const message = `
-🎉 *New Referral Bonus!* 🎉
-------------------------------------
-👥 *New User:* \`${escapeMarkdown(refereeName)}\` (Code: \`${escapeMarkdown(refereeCode)}\`)
-🌟 *Received:* ৳ ${GLOBAL_CONFIG.REFERRAL_BONUS_REFEREE}
-Referral From:
-👤 *Referrer:* \`${escapeMarkdown(referrerName)}\` (Code: \`${escapeMarkdown(referrerCode)}\`)
-🌟 *Received:* ৳ ${GLOBAL_CONFIG.REFERRAL_BONUS_REFERRER}
-------------------------------------
-⏰ *Timestamp:* ${new Date().toLocaleString('en-GB', { timeZone: 'Asia/Dhaka' })}
-            `;
-
-            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    chat_id: TELEGRAM_CHAT_ID,
-                    text: message,
-                    parse_mode: 'MarkdownV2'
-                })
-            })
-            .catch(error => console.error('Error sending referral Telegram message:', error));
-        }
-
-        // === ADMIN PANEL FUNCTIONS ===
-        function adminNavigateTo(pageId) {
-            document.querySelectorAll('.admin-page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
-            document.querySelectorAll('.admin-sidebar .nav-link').forEach(link => {
-                link.classList.remove('active');
-                if (link.dataset.page === pageId) link.classList.add('active');
+            // Save withdrawal request to Firebase
+            const withdrawalId = await saveWithdrawalToFirebase({
+                amount: amount,
+                method: method,
+                paymentDetail: account
             });
+
+            if (withdrawalId) {
+                statusMsg.textContent = "Withdrawal request submitted successfully! Payment will be processed shortly.";
+                statusMsg.classList.add('success-message');
+                document.getElementById('withdrawAmountInput').value = "";
+                document.getElementById('withdrawMethodSelect').value = "";
+                document.getElementById('withdrawAccountInput').value = "";
+            } else {
+                statusMsg.textContent = "Error submitting withdrawal request. Please try again.";
+                statusMsg.classList.add('error-message');
+                // Refund points
+                currentUser.points += amount;
+                updateUI();
+                await saveUserState();
+            }
         }
 
-        function setupAdminEventListeners() {
-            document.getElementById('admin-login-btn').addEventListener('click', handleAdminLogin);
-            document.getElementById('admin-logout-btn').addEventListener('click', () => {
-                auth.signOut().then(() => window.location.reload());
-            });
-            document.getElementById('save-settings-btn').addEventListener('click', saveSettings);
-            document.getElementById('send-notification-btn').addEventListener('click', sendNotification);
-            document.querySelectorAll('.admin-sidebar .nav-link').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    adminNavigateTo(link.dataset.page);
-                });
-            });
+        // Save user state
+        async function saveUserState() {
+            const deviceId = localStorage.getItem('galaxyEarnDeviceId');
+            let allUsersData = JSON.parse(localStorage.getItem('galaxyEarnAllUsers')) || {};
+            allUsersData[deviceId] = currentUser;
+            localStorage.setItem('galaxyEarnAllUsers', JSON.stringify(allUsersData));
             
-            // Alert modal buttons
-            document.getElementById('alert-ok-btn').addEventListener('click', () => {
-                document.getElementById('custom-alert').classList.add('hidden');
-            });
+            // Save to Firebase
+            await saveUserToFirebase();
         }
 
-        async function handleAdminLogin() {
-            const email = document.getElementById('admin-email').value;
-            const password = document.getElementById('admin-password').value;
-            try {
-                const userCredential = await auth.signInWithEmailAndPassword(email, password);
-                if (!ADMIN_UIDS.includes(userCredential.user.uid)) {
-                    await auth.signOut();
-                    adminShowAlert("You are not authorized to access this panel.");
-                }
-            } catch (error) {
-                adminShowAlert(error.message);
-            }
-        }
+        // Make functions available globally
+        window.handleBonusLinkClick = handleBonusLinkClick;
 
-        function loadDashboardData() {
-            db.collection("users").onSnapshot(snap => {
-                document.getElementById('total-users').textContent = snap.size;
-            });
-            
-            db.collection("withdrawals").where("status", "==", "pending").onSnapshot(snap => {
-                document.getElementById('pending-withdrawals').textContent = snap.size;
-            });
-        }
-
-        function loadUsers() {
-            const usersTableBody = document.getElementById('users-table-body');
-            db.collection("users").onSnapshot((snapshot) => {
-                usersTableBody.innerHTML = '';
-                snapshot.forEach(doc => {
-                    const user = doc.data();
-                    const isBlocked = user.isBlocked || false;
-                    const row = `<tr>
-                        <td>${user.name || 'N/A'}</td>
-                        <td>${user.telegramId ? `ID: ${user.telegramId}` : 'Guest'}</td>
-                        <td>৳ ${user.points || 0}</td>
-                        <td><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${isBlocked ? 'bg-red-100 text-red-800' : 'bg-green-100 text-green-800'}">${isBlocked ? 'Blocked' : 'Active'}</span></td>
-                        <td><button class="admin-btn text-xs ${isBlocked ? 'admin-btn-success' : 'admin-btn-danger'}" onclick="toggleBlockUser('${doc.id}', ${isBlocked})">${isBlocked ? 'Unblock' : 'Block'}</button></td>
-                    </tr>`;
-                    usersTableBody.innerHTML += row;
-                });
-            });
-        }
-
-        function loadWithdrawals() {
-            const withdrawalsTableBody = document.getElementById('withdrawals-table-body');
-            db.collection("withdrawals").where("status", "==", "pending").onSnapshot((snapshot) => {
-                withdrawalsTableBody.innerHTML = '';
-                snapshot.forEach(docSnap => {
-                    const request = docSnap.data();
-                    const requestedDate = request.requestedAt?.toDate().toLocaleString() || 'N/A';
-                    const row = `<tr>
-                        <td>${request.userName || 'N/A'}</td>
-                        <td>৳ ${request.amount}</td>
-                        <td>${request.method}</td>
-                        <td>${request.paymentDetail || 'N/A'}</td>
-                        <td>${requestedDate}</td>
-                        <td class="space-x-2">
-                            <button class="admin-btn admin-btn-success text-xs" onclick="handleWithdrawal('${docSnap.id}', 'approved')">Approve</button>
-                            <button class="admin-btn admin-btn-danger text-xs" onclick="handleWithdrawal('${docSnap.id}', 'rejected')">Reject</button>
-                        </td>
-                    </tr>`;
-                    withdrawalsTableBody.innerHTML += row;
-                });
-            });
-        }
-
-        async function loadSettings() {
-            try {
-                const configRef = db.collection("config").doc("main");
-                const docSnap = await configRef.get();
-                if (docSnap.exists()) {
-                    const config = docSnap.data();
-                    document.getElementById('min-withdrawal').value = config.minWithdrawal || '';
-                    document.getElementById('daily-ad-limit').value = config.dailyAdLimit || '';
-                    document.getElementById('ad-reward-points').value = config.adRewardPoints || '';
-                    document.getElementById('ref-withdraw-count').value = config.refWithdrawCount || '';
-                    document.getElementById('ref-bonus-referrer').value = config.refBonusReferrer || '';
-                    document.getElementById('ref-bonus-referee').value = config.refBonusReferee || '';
-                    document.getElementById('payment-methods').value = (config.paymentMethods || []).join(', ');
-                }
-            } catch (error) {
-                console.error("Error loading settings:", error);
-            }
-        }
-
-        // Global admin functions for onclick events
-        window.toggleBlockUser = (userId, isBlocked) => {
-            const action = isBlocked ? 'Unblock' : 'Block';
-            adminShowConfirm(`Are you sure you want to ${action.toLowerCase()} this user?`, async () => {
-                try {
-                    await db.collection("users").doc(userId).update({ isBlocked: !isBlocked });
-                    adminShowAlert(`User successfully ${action.toLowerCase()}ed.`);
-                } catch (error) {
-                    adminShowAlert(`Error: ${error.message}`);
-                }
-            });
-        };
-
-        window.handleWithdrawal = (requestId, newStatus) => {
-            const statusText = newStatus === 'approved' ? 'approve' : 'reject';
-            adminShowConfirm(`Are you sure you want to ${statusText} this request?`, async () => {
-                try {
-                    const requestRef = db.collection("withdrawals").doc(requestId);
-                    const requestSnap = await requestRef.get();
-                    
-                    if (requestSnap.exists()) {
-                        const requestData = requestSnap.data();
-                        
-                        // Handle point refund if rejected
-                        if (newStatus === 'rejected') {
-                            const userRef = db.collection("users").doc(requestData.userId);
-                            const userSnap = await userRef.get();
-                            if(userSnap.exists()){
-                                const currentPoints = userSnap.data().points || 0;
-                                await userRef.update({ points: currentPoints + requestData.amount });
-                            }
-                        }
-
-                        // Update withdrawal status
-                        await requestRef.update({ status: newStatus });
-                        adminShowAlert(`Request ${statusText}ed successfully.`);
-                    }
-                } catch (error) {
-                    adminShowAlert(`Error: ${error.message}`);
-                }
-            });
-        };
-
-        async function sendNotification() {
-            const title = document.getElementById('notification-title').value;
-            const message = document.getElementById('notification-message').value;
-            if (!title || !message) return adminShowAlert("Title and message are required.");
-            try {
-                await db.collection("notifications").add({
-                    title,
-                    message,
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                });
-                adminShowAlert("Notification sent to all users!");
-                document.getElementById('notification-title').value = '';
-                document.getElementById('notification-message').value = '';
-            } catch (error) {
-                adminShowAlert(`Error: ${error.message}`);
-            }
-        }
-
-        async function saveSettings() {
-            const minWithdrawal = parseInt(document.getElementById('min-withdrawal').value);
-            const dailyAdLimit = parseInt(document.getElementById('daily-ad-limit').value);
-            const adRewardPoints = parseInt(document.getElementById('ad-reward-points').value);
-            const refWithdrawCount = parseInt(document.getElementById('ref-withdraw-count').value);
-            const refBonusReferrer = parseInt(document.getElementById('ref-bonus-referrer').value);
-            const refBonusReferee = parseInt(document.getElementById('ref-bonus-referee').value);
-            const paymentMethods = document.getElementById('payment-methods').value.split(',').map(s => s.trim()).filter(Boolean);
-            
-            if (isNaN(minWithdrawal) || isNaN(dailyAdLimit) || isNaN(adRewardPoints) || 
-                isNaN(refWithdrawCount) || isNaN(refBonusReferrer) || isNaN(refBonusReferee)) {
-                return adminShowAlert("Please enter valid numbers in all fields.");
-            }
-            
-            try {
-                await db.collection("config").doc("main").set({ 
-                    minWithdrawal, 
-                    dailyAdLimit, 
-                    adRewardPoints,
-                    refWithdrawCount,
-                    refBonusReferrer,
-                    refBonusReferee,
-                    paymentMethods 
-                }, { merge: true });
-                
-                // Refresh global config
-                await fetchAppConfig();
-                
-                adminShowAlert("Settings saved successfully!");
-            } catch (error) {
-                adminShowAlert(`Error saving settings: ${error.message}`);
-            }
-        }
-        
-        // Alert/Confirm Modals
-        function adminShowAlert(message) {
-            document.getElementById('alert-message').textContent = message;
-            document.getElementById('custom-alert').classList.remove('hidden');
-        }
-
-        function adminShowConfirm(message, onConfirm) {
-            const confirmModal = document.getElementById('custom-confirm');
-            const confirmMessage = document.getElementById('confirm-message');
-            const confirmOkBtn = document.getElementById('confirm-ok-btn');
-            const confirmCancelBtn = document.getElementById('confirm-cancel-btn');
-
-            confirmMessage.textContent = message;
-            confirmModal.classList.remove('hidden');
-
-            const okListener = () => {
-                onConfirm();
-                confirmModal.classList.add('hidden');
-                confirmOkBtn.removeEventListener('click', okListener);
-                confirmCancelBtn.removeEventListener('click', cancelListener);
-            };
-
-            const cancelListener = () => {
-                confirmModal.classList.add('hidden');
-                confirmOkBtn.removeEventListener('click', okListener);
-                confirmCancelBtn.removeEventListener('click', cancelListener);
-            };
-
-            confirmOkBtn.addEventListener('click', okListener);
-            confirmCancelBtn.addEventListener('click', cancelListener);
-        }
-
-        // === INITIALIZATION ===
-        document.addEventListener('DOMContentLoaded', async () => {
-            // Initialize lucide icons
-            lucide.createIcons();
-            
-            // Setup admin event listeners
-            setupAdminEventListeners();
-            
-            // Check auth state
-            auth.onAuthStateChanged((user) => {
-                if (user && ADMIN_UIDS.includes(user.uid)) {
-                    // Admin logged in
-                    appContainer.style.display = 'none';
-                    document.getElementById('admin-login-view').classList.add('hidden');
-                    document.getElementById('admin-dashboard').classList.remove('hidden');
-                    loadDashboardData();
-                    loadUsers();
-                    loadWithdrawals();
-                    loadSettings();
-                } else if (user && !ADMIN_UIDS.includes(user.uid)) {
-                    // Regular user logged in to Firebase (not admin)
-                    auth.signOut();
-                }
-            });
-
-            // 6-second loading screen
-            setTimeout(async () => {
-                await fetchAppConfig();
-                
-                loadingPage.style.opacity = '0';
-                setTimeout(() => {
-                    loadingPage.style.display = 'none';
-                    appContainer.style.display = 'block';
-                }, 500);
-                
-                if (window.Telegram && Telegram.WebApp) {
-                    Telegram.WebApp.expand();
-                    Telegram.WebApp.enableClosingConfirmation();
-                }
-
-                await loadUserState();
-                applyTheme(localStorage.getItem('galaxyEarnTheme') || 'light');
-                navigateTo('home');
-
-                // Add event listeners
-                themeToggleBtn.addEventListener('click', toggleTheme);
-                bottomNavItems.forEach(item => {
-                    item.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const page = item.dataset.page;
-                        navigateTo(page);
-                    });
-                });
-                adCloseBtn.addEventListener('click', closeAdModalAndReward);
-            }, 6000);
-        });
     </script>
 </body>
 </html>
