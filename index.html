@@ -90,6 +90,44 @@
             background-color: var(--bg-light); /* Fallback for content area */
         }
 
+        /* Loading Page Styles */
+        #loadingPage {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #FFFFFF; /* White background */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease-out;
+            color: var(--primary-color);
+        }
+
+        .loading-spinner {
+            border: 5px solid #f3f3f3; /* Light grey */
+            border-top: 5px solid var(--primary-color); /* Blue */
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: loadspin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes loadspin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        
         /* Header Section */
         .header {
             height: 180px;
@@ -862,7 +900,11 @@
 
 </head>
 <body>
-    <div class="app-container">
+    <div id="loadingPage">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading App... Please Wait (6s)</div>
+    </div>
+    <div class="app-container" style="display: none;">
         <div class="header">
             <button class="theme-toggle" id="themeToggle">
                 <i class="fas fa-sun"></i>
@@ -881,7 +923,7 @@
                     </button>
                 </h1>
                 <div class="points-display" id="userPointsDisplay">
-                    <i class="fas fa-coins"></i> 0 Points 
+                    <i class="fas fa-money-bill-wave"></i> ৳ 0 
                 </div>
                 <div class="stats-display">
                     <div class="stat-item">
@@ -939,29 +981,34 @@
     </div>
 
     <script>
-        // Configuration (Keep these the same or update as needed)
-        const APP_NAME = "Ads to Earning25 "; // Changed app name for the new design
-        const ADS_PER_DAY_LIMIT = 5000;
-        const POINTS_PER_AD = 5;
-        const MIN_WITHDRAW_POINTS = 400;
+        // Configuration (Updated as per request)
+        const APP_NAME = "Ads to Earning25";
+        const ADS_PER_DAY_LIMIT = 20; // Changed from 5000 to 20
+        const POINTS_PER_AD = 6; // Changed from 5 to 6
+        const MIN_WITHDRAW_POINTS = 600; // Changed from 400 to 600
         const REFERRAL_BONUS_REFERRER = 10;
         const REFERRAL_BONUS_REFEREE = 5;
-        const MONETAG_AD_FUNCTION_NAME = 'show_9490059'; // Ensure this is correct
-        const TELEGRAM_BOT_TOKEN = "7354534121:AAHssrmmk3zam5STFXWnOjNRqKyexOjXvmE"; // Ensure this is your correct bot token
-        const TELEGRAM_CHAT_ID = "-1002783990004"; // Ensure this is your correct chat ID and your bot is admin
-        const DEVELOPER_TELEGRAM_PROFILE_LINK = "https://t.me/freeinternet_bd25";
-        const DEVELOPER_WEBSITE_LINK = "https://t.me/freeinternet_bd25";
-        const OFFICIAL_CHANNEL_LINK = "https://t.me/freeinternet_bd25"; // Placeholder, UPDATE THIS
-        const SUPPORT_GROUP_LINK = "https://t.me/safreenetbd"; // Placeholder, UPDATE THIS
-        const REFERRAL_BOT_LINK = "https://t.me/Ads_to_Earning25_bot"; // Placeholder, UPDATE THIS
+        const WITHDRAWAL_REFERRAL_COUNT = 14; // New referral condition
+        const MONETAG_AD_FUNCTION_NAME = 'show_9490059'; 
+        const TELEGRAM_BOT_TOKEN = "7354534121:AAHssrmmk3zam5STFXWnOjNRqKyexOjXvmE"; 
+        const TELEGRAM_CHAT_ID = "-1002783990004"; 
+        const REFERRAL_BOT_LINK = "https://t.me/Ads_to_Earning25_bot"; 
+
+        // Removed all specific links for developer/channel as requested, will use '#' or null
+        const DEVELOPER_PROFILE_LINK = "#"; // Floki - no action
+        const OFFICIAL_CHANNEL_LINK = "#"; // No action
+        const SUPPORT_GROUP_LINK = "#"; // No action
         const BONUS_CHANNELS = [
-            { id: 'tg_official_channel', name: 'Official Channel', link: OFFICIAL_CHANNEL_LINK, reward: 5, icon: 'fab fa-telegram-plane' },
-            { id: 'tg_support_group', name: 'Support Group', link: SUPPORT_GROUP_LINK, reward: 5, icon: 'fas fa-headset' },
-            { id: 'tg_community', name: 'Telegram Community', link: "https://t.me/freeinternet_bd25", reward: 5, icon: 'fab fa-telegram' },
-            { id: 'wa_community', name: 'Youtube Community', link: "https://youtube.com/@gaming_xa1?si=1_iAFpbbvqrENgTD", reward: 10, icon: 'fab fa-youtube' }
+            // Links removed from here
+            { id: 'tg_official_channel', name: 'Official Channel', link: '', reward: 5, icon: 'fab fa-telegram-plane' },
+            { id: 'tg_support_group', name: 'Support Group', link: '', reward: 5, icon: 'fas fa-headset' },
+            { id: 'tg_community', name: 'Telegram Community', link: "", reward: 5, icon: 'fab fa-telegram' },
+            { id: 'wa_community', name: 'Youtube Community', link: "", reward: 10, icon: 'fab fa-youtube' }
         ];
 
         // DOM Elements
+        const loadingPage = document.getElementById('loadingPage');
+        const appContainer = document.querySelector('.app-container');
         const themeToggleBtn = document.getElementById('themeToggle');
         const profileNameDisplay = document.getElementById('profileNameDisplay');
         const profilePic = document.getElementById('profilePic');
@@ -1144,25 +1191,34 @@
 
         // Initialize the app
         document.addEventListener('DOMContentLoaded', () => {
-            if (window.Telegram && Telegram.WebApp) {
-                Telegram.WebApp.expand();
-                Telegram.WebApp.enableClosingConfirmation();
-            }
-            loadUserState();
-            applyTheme(localStorage.getItem('galaxyEarnTheme') || 'light'); // Default to light mode for "normal"
+             // 6-second loading screen
+            setTimeout(() => {
+                loadingPage.style.opacity = '0';
+                setTimeout(() => {
+                    loadingPage.style.display = 'none';
+                    appContainer.style.display = 'block';
+                }, 500); // Wait for fade-out transition
+                
+                if (window.Telegram && Telegram.WebApp) {
+                    Telegram.WebApp.expand();
+                    Telegram.WebApp.enableClosingConfirmation();
+                }
+                loadUserState();
+                applyTheme(localStorage.getItem('galaxyEarnTheme') || 'light'); // Default to light mode for "normal"
 
-            navigateTo('home');
+                navigateTo('home');
 
-            themeToggleBtn.addEventListener('click', toggleTheme);
-            document.getElementById('editNameBtn').addEventListener('click', promptForNewName);
-            bottomNavItems.forEach(item => {
-                item.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const page = item.dataset.page;
-                    navigateTo(page);
+                themeToggleBtn.addEventListener('click', toggleTheme);
+                document.getElementById('editNameBtn').addEventListener('click', promptForNewName);
+                bottomNavItems.forEach(item => {
+                    item.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const page = item.dataset.page;
+                        navigateTo(page);
+                    });
                 });
-            });
-            adCloseBtn.addEventListener('click', closeAdModalAndReward);
+                adCloseBtn.addEventListener('click', closeAdModalAndReward);
+            }, 6000); // 6 seconds
         });
 
         // Theme management
@@ -1187,7 +1243,7 @@
             `;
             document.getElementById('editNameBtn').addEventListener('click', promptForNewName);
 
-            userPointsDisplay.innerHTML = `<i class="fas fa-coins"></i> ${currentUser.points} Points`;
+            userPointsDisplay.innerHTML = `<i class="fas fa-money-bill-wave"></i> ৳ ${currentUser.points}`;
             adsWatchedTodayEl.textContent = currentUser.adsWatchedToday;
             adsLeftTodayEl.textContent = ADS_PER_DAY_LIMIT - currentUser.adsWatchedToday;
             totalAdsWatchedEl.textContent = currentUser.totalAdsWatchedLifetime;
@@ -1241,7 +1297,7 @@
                         <i class="fas fa-home"></i> Welcome
                     </h2>
                     <p class="task-description">
-                        Welcome to ${APP_NAME}, ${currentUser.name.split(' ')[0]}! Start earning points by completing tasks, watching ads, and inviting friends.
+                        Welcome to ${APP_NAME}, ${currentUser.name.split(' ')[0]}! Start earning ৳ Taka by completing tasks, watching ads, and inviting friends.
                     </p>
                     <div class="stats-display" style="justify-content: space-between; margin-top: 20px; gap: 8px;">
                         <div class="stat-item" style="flex: 1; margin: 0 4px;">
@@ -1249,8 +1305,8 @@
                             <div class="stat-label">Ads Left</div>
                         </div>
                         <div class="stat-item" style="flex: 1; margin: 0 4px;">
-                            <div class="stat-value">${currentUser.points}</div>
-                            <div class="stat-label">Points</div>
+                            <div class="stat-value">৳ ${currentUser.points}</div>
+                            <div class="stat-label">Total Taka</div>
                         </div>
                         <div class="stat-item" style="flex: 1; margin: 0 4px;">
                             <div class="stat-value">${currentUser.referredUsers ? currentUser.referredUsers.length : 0}</div>
@@ -1259,12 +1315,12 @@
                     </div>
                 </div>
                 <div style="margin-top: 15px; text-align: center;">
-                    <a href="${OFFICIAL_CHANNEL_LINK}" target="_blank" class="btn btn-secondary">
+                    <a href="${OFFICIAL_CHANNEL_LINK}" target="_blank" class="btn btn-secondary" onclick="event.preventDefault(); showToast('Channel Link Not Available');">
                         <i class="fab fa-telegram-plane"></i> Join Our Channel
                     </a>
                 </div>
                 <div class="developer-footer">
-                    Developed by <a href="${DEVELOPER_TELEGRAM_PROFILE_LINK}" target="_blank" class="developer-link">SOJIB ALOM</a>
+                    Developed by Floki
                 </div>`;
         }
 
@@ -1278,10 +1334,10 @@
                             <i class="fas fa-ad"></i>
                         </div>
                         <div class="task-title">Watch Ads</div>
-                        <div class="reward-badge">+${POINTS_PER_AD}</div>
+                        <div class="reward-badge">+৳ ${POINTS_PER_AD}</div>
                     </div>
                     <p class="task-description">
-                        Watch short video ads to earn points. You can watch up to ${ADS_PER_DAY_LIMIT} ads per day.
+                        Watch short video ads to earn ৳ Taka. You can watch exactly **${ADS_PER_DAY_LIMIT} ads per day**. Each ad rewards **৳ ${POINTS_PER_AD}**.
                     </p>
                     <div class="progress-container">
                         <div class="progress-text">
@@ -1293,11 +1349,11 @@
                         </div>
                     </div>
                     <button class="btn btn-primary" id="watchDailyAdBtn" ${adsLeft <= 0 ? 'disabled' : ''}>
-                        <i class="fas fa-play"></i> Watch Ad & Earn ${POINTS_PER_AD} Points
+                        <i class="fas fa-play"></i> Watch Ad & Earn ৳ ${POINTS_PER_AD}
                     </button>
                 </div>
                 <div class="developer-footer">
-                    Developed by <a href="${DEVELOPER_TELEGRAM_PROFILE_LINK}" target="_blank" class="developer-link">SOJIB ALOM</a>
+                    Developed by Floki
                 </div>`;
             if (adsLeft > 0) {
                 document.getElementById('watchDailyAdBtn').addEventListener('click', handleWatchDailyAd);
@@ -1307,7 +1363,7 @@
         function renderBonusPage() {
             let channelsHtml = BONUS_CHANNELS.map(channel => {
                 const isClaimed = currentUser.claimedBonuses.includes(channel.id);
-                const linkIsValid = channel.link && !channel.link.toLowerCase().includes("your_");
+                const linkIsValid = channel.link && channel.link !== '#' && channel.link !== ''; // Only use if link is valid
                 return `
                     <li class="channel-item">
                         <div class="channel-info">
@@ -1316,14 +1372,16 @@
                             </div>
                             <div>
                                 <div class="channel-name">${channel.name}</div>
-                                <div class="channel-reward">+${channel.reward} Points</div>
+                                <div class="channel-reward">+৳ ${channel.reward}</div>
                             </div>
                         </div>
                         ${ linkIsValid ?
                             `<a href="${channel.link}" target="_blank" class="join-btn ${isClaimed ? 'claimed' : ''}" data-channel-id="${channel.id}" data-reward="${channel.reward}" onclick="handleBonusLinkClick(event, this)">
                                 ${isClaimed ? 'Claimed' : 'Join'}
                             </a>` :
-                            `<span style="font-size:0.75rem; color: var(--text-secondary);">Coming Soon</span>`
+                            `<button class="join-btn ${isClaimed ? 'claimed' : ''}" onclick="event.preventDefault(); handleBonusLinkClick(event, this);" data-channel-id="${channel.id}" data-reward="${channel.reward}" ${isClaimed ? 'disabled' : ''}>
+                                ${isClaimed ? 'Claimed' : 'Join'}
+                            </button>`
                         }
                     </li>`;
             }).join('');
@@ -1334,53 +1392,62 @@
                         <i class="fas fa-gift"></i> Bonus Rewards
                     </h2>
                     <p class="task-description">
-                        Join our community channels to earn bonus points. Visit the channel and return to claim your reward.
+                        Join our community channels to earn bonus ৳ Taka. Visit the link and return to claim your reward. **Note: All links have been disabled/removed as per request.**
                     </p>
                     <ul class="channel-list">${channelsHtml}</ul>
                 </div>
                 <div class="developer-footer">
-                    Developed by <a href="${DEVELOPER_TELEGRAM_PROFILE_LINK}" target="_blank" class="developer-link">SOJIB ALOM</a>
+                    Developed by Floki
                 </div>`;
         }
 
         function renderWithdrawPage() {
+            const currentReferrals = currentUser.referredUsers ? currentUser.referredUsers.length : 0;
+            const referralNeeded = WITHDRAWAL_REFERRAL_COUNT - currentReferrals;
+            const canWithdraw = currentReferrals >= WITHDRAWAL_REFERRAL_COUNT;
+            
+            let statusMessage = '';
+            if (!canWithdraw) {
+                statusMessage = `<p class="error-message"><i class="fas fa-exclamation-triangle"></i> Withdrawal requires **${WITHDRAWAL_REFERRAL_COUNT}** active referrals. You need **${referralNeeded}** more.</p>`;
+            } else {
+                statusMessage = `<p class="success-message"><i class="fas fa-check-circle"></i> Referral requirement met! You have ${currentReferrals}/${WITHDRAWAL_REFERRAL_COUNT} referrals.</p>`;
+            }
+            
             mainContent.innerHTML = `
                 <div class="task-card">
                     <h2 class="section-title">
                         <i class="fas fa-wallet"></i> Withdraw
                     </h2>
+                    ${statusMessage}
                     <p class="task-description">
-                        <b>Convert your points to real money                  
+                        <b>Convert your ৳ Taka to real money.                  
  
     
- Minimum withdrawal is ${MIN_WITHDRAW_POINTS} points.</b>
+ Minimum withdrawal is ৳ ${MIN_WITHDRAW_POINTS}.</b>
                     </p>
                     <div class="input-group">
-                        <label class="input-label">Amount (Points)</label>
+                        <label class="input-label">Amount (৳ Taka)</label>
                         <input type="number" id="withdrawAmountInput" class="input-field" placeholder="Enter amount">
                     </div>
                     <div class="input-group">
                         <label class="input-label">Payment Method</label>
                         <select id="withdrawMethodSelect" class="select-field">
                             <option value="">Select method</option>
-                            <option>Telegram Mini bot code 400 Points</option>
-                            <option>Telegram Mini Bot Code 800 Poins</option>
-                            
-  <option>Telegram Mini Bot Code 1500 Poin </option>                          
-    <option>Telegram Mini Bot Code 2200 Points ( VIP) </option>              
-                                    </select>
+                            <option value="Bkash">Bkash</option>
+                            <option value="Nagad">Nagad</option>
+                        </select>
                     </div>
                     <div class="input-group">
-                        <label class="input-label">Enter your Telegram Username </label>
-                        <input type="text" id="withdrawAccountInput" class="input-field" placeholder="Enter your account details">
+                        <label class="input-label">Enter your Payment Account Number</label>
+                        <input type="text" id="withdrawAccountInput" class="input-field" placeholder="Enter your Bkash/Nagad number">
                     </div>
-                    <button class="btn btn-primary" id="submitWithdrawBtn">
+                    <button class="btn btn-primary" id="submitWithdrawBtn" ${!canWithdraw ? 'disabled' : ''}>
                         <i class="fas fa-paper-plane"></i> Submit Request
                     </button>
                     <p class="status-message" id="withdrawStatusMsg"></p>
                 </div>
                 <div class="developer-footer">
-                    Developed by <a href="${DEVELOPER_TELEGRAM_PROFILE_LINK}" target="_blank" class="developer-link">SOJIB ALOM</a>
+                    Developed by Floki
                 </div>`;
             document.getElementById('submitWithdrawBtn').addEventListener('click', handleSubmitWithdrawal);
         }
@@ -1425,7 +1492,7 @@
                         <i class="fas fa-share-alt"></i> Refer & Earn
                     </h6>
                     <p class="task-description">
-                        Invite friends and earn ${REFERRAL_BONUS_REFERRER} points for each successful referral. They'll get ${REFERRAL_BONUS_REFEREE} points too!
+                        Invite friends and earn ৳ ${REFERRAL_BONUS_REFERRER} for each successful referral. They'll get ৳ ${REFERRAL_BONUS_REFEREE} too! **(Withdrawal requires ${WITHDRAWAL_REFERRAL_COUNT} referrals)**
                     </p>
                     <div class="referral-container">
                         <label class="input-label">Your Referral Code</label>
@@ -1444,7 +1511,7 @@
                     </div>
                     <div class="referral-stats">
                         <div class="stat-card">
-                            <div class="stat-number">${REFERRAL_BONUS_REFERRER}</div>
+                            <div class="stat-number">৳ ${REFERRAL_BONUS_REFERRER}</div>
                             <div class="stat-title">Per Referral</div>
                         </div>
                         <div class="stat-card">
@@ -1452,14 +1519,14 @@
                             <div class="stat-title">Total</div>
                         </div>
                         <div class="stat-card">
-                            <div class="stat-number">${referredUsersCount * REFERRAL_BONUS_REFERRER}</div>
+                            <div class="stat-number">৳ ${referredUsersCount * REFERRAL_BONUS_REFERRER}</div>
                             <div class="stat-title">Earned</div>
                         </div>
                     </div>
                     ${referredUsersListHtml}
                 </div>
                 <div class="developer-footer">
-                    Developed by <a href="${DEVELOPER_TELEGRAM_PROFILE_LINK}" target="_blank" class="developer-link">SOJIB ALOM</a>
+                    Developed by Floki
                 </div>`;
 
             document.getElementById('copyReferralCodeBtn').addEventListener('click', () => {
@@ -1477,8 +1544,8 @@
             document.getElementById('shareReferralLinkBtn').addEventListener('click', () => {
                 if (navigator.share) {
                     navigator.share({
-                        title: `${APP_NAME} - Earn Points!`,
-                        text: `Join ${APP_NAME} using my referral code ${currentUser.referralCode} and we both get bonus points!`,
+                        title: `${APP_NAME} - Earn ৳ Taka!`,
+                        text: `Join ${APP_NAME} using my referral code ${currentUser.referralCode} and we both get bonus ৳ Taka!`,
                         url: referralLink,
                     }).catch((error) => console.log('Error sharing', error));
                 } else {
@@ -1529,10 +1596,11 @@
                                 adCloseBtn.style.display = 'block';
                             }
                         }).catch(error => {
-                            handleAdError("Ad closed too soon or error occurred. No points awarded.");
+                            handleAdError("Ad closed too soon or error occurred. No Taka awarded.");
                             console.error("Monetag ad error:", error);
                         });
                     } else {
+                        // Simulation for the original ad code structure not returning a promise
                         setTimeout(() => {
                             if (adRewardPending) {
                                 adSpinner.style.display = 'none';
@@ -1588,29 +1656,38 @@
                 currentUser.lastAdWatchDate = new Date().toLocaleDateString();
                 updateUI();
                 saveUserState();
-                showToast(`+${POINTS_PER_AD} points earned!`);
+                showToast(`+৳ ${POINTS_PER_AD} earned!`);
             } else if (adRewardPending && !adWatchedSuccessfully) {
-                showToast("Ad not completed. No points awarded.");
+                showToast("Ad not completed. No Taka awarded.");
             }
             adRewardPending = false;
             adWatchedSuccessfully = false;
         }
 
-        // Bonus channel handling
+        // Bonus channel handling (Links are now disabled)
         function handleBonusLinkClick(event, buttonElement) {
             const channelId = buttonElement.dataset.channelId;
             const reward = parseInt(buttonElement.dataset.reward);
+            const link = buttonElement.href;
+            const isClaimed = currentUser.claimedBonuses.includes(channelId);
 
-            if (currentUser.claimedBonuses.includes(channelId)) {
+            if (isClaimed) {
                 showToast("Bonus already claimed!");
                 return;
             }
 
             event.preventDefault();
-            const newWindow = window.open(buttonElement.href, '_blank');
+            
+            if (link && link !== '#' && link !== '') {
+                // If a link is present, open in new tab (as a courtesy/to simulate joining)
+                const newWindow = window.open(link, '_blank');
+            } else {
+                 showToast("No active link for this bonus. Claiming after a brief wait.", 5000);
+            }
+
 
             buttonElement.textContent = 'Verifying...';
-            buttonElement.style.pointerEvents = 'none';
+            buttonElement.disabled = true;
 
             setTimeout(() => {
                 if (!currentUser.claimedBonuses.includes(channelId)) {
@@ -1620,12 +1697,12 @@
                     saveUserState();
                     buttonElement.textContent = 'Claimed';
                     buttonElement.classList.add('claimed');
-                    showToast(`+${reward} bonus points claimed!`);
+                    showToast(`+৳ ${reward} bonus claimed!`);
                 } else {
                      buttonElement.textContent = 'Claimed';
                      buttonElement.classList.add('claimed');
                 }
-                buttonElement.style.pointerEvents = 'auto';
+                buttonElement.disabled = false;
             }, 7000);
         }
 
@@ -1635,9 +1712,16 @@
             const method = document.getElementById('withdrawMethodSelect').value;
             const account = document.getElementById('withdrawAccountInput').value.trim();
             const statusMsg = document.getElementById('withdrawStatusMsg');
+            const currentReferrals = currentUser.referredUsers ? currentUser.referredUsers.length : 0;
 
             statusMsg.className = 'status-message';
             statusMsg.textContent = '';
+
+            if (currentReferrals < WITHDRAWAL_REFERRAL_COUNT) {
+                 statusMsg.textContent = `You must have ${WITHDRAWAL_REFERRAL_COUNT} referrals to withdraw. You have ${currentReferrals}.`;
+                 statusMsg.classList.add('error-message');
+                 return;
+            }
 
             if (isNaN(amount) || amount <= 0) {
                 statusMsg.textContent = "Please enter a valid amount.";
@@ -1645,22 +1729,22 @@
                 return;
             }
             if (amount < MIN_WITHDRAW_POINTS) {
-                statusMsg.textContent = `Minimum withdrawal is ${MIN_WITHDRAW_POINTS} points.`;
+                statusMsg.textContent = `Minimum withdrawal is ৳ ${MIN_WITHDRAW_POINTS}.`;
                 statusMsg.classList.add('error-message');
                 return;
             }
             if (amount > currentUser.points) {
-                statusMsg.textContent = "You don't have enough points.";
+                statusMsg.textContent = "You don't have enough Taka.";
                 statusMsg.classList.add('error-message');
                 return;
             }
             if (!method) {
-                statusMsg.textContent = "Please select a payment method.";
+                statusMsg.textContent = "Please select a payment method (Bkash/Nagad).";
                 statusMsg.classList.add('error-message');
                 return;
             }
-            if (!account) {
-                statusMsg.textContent = "Please enter your account details.";
+            if (!account || account.length < 10) {
+                statusMsg.textContent = "Please enter a valid account number.";
                 statusMsg.classList.add('error-message');
                 return;
             }
@@ -1674,14 +1758,15 @@
 ------------------------------------
 🕵️ *𝗔𝗽𝗽 𝗡𝗮𝗺𝗲 :* \`${escapeMarkdown(APP_NAME)}\`
 👤 *𝗨𝘀𝗲𝗿 𝗡𝗮𝗺𝗲 :* \`${escapeMarkdown(currentUser.name)}\`
-💰 *𝗣𝗼𝗶𝗻𝘁𝘀 :* ${amount}
+💰 *𝗔𝗺𝗼𝘂𝗻𝘁 :* ৳ ${amount}
 💳 *𝗠𝗲𝘁𝗵𝗼𝗱 :* ${escapeMarkdown(method)}
-🏦 *𝗪𝗮𝗹𝗹𝗲𝘁 :* \`${escapeMarkdown(account)}\`
+🏦 *𝗔𝗰𝗰𝗼𝘂𝗻𝘁 :* \`${escapeMarkdown(account)}\`
 ------------------------------------
-♎ 𝗠𝗮𝗶𝗻 𝗕𝗮𝗹𝗮𝗻𝗰𝗲 : ${currentUser.points - amount}
+📊 *Referrals :* ${currentReferrals}/${WITHDRAWAL_REFERRAL_COUNT}
+♎ 𝗠𝗮𝗶𝗻 𝗕𝗮𝗹𝗮𝗻𝗰𝗲 : ৳ ${currentUser.points - amount}
 👀 𝗧𝗼𝘁𝗮𝗹 𝗔𝗱𝘀 𝗪𝗮𝘁𝗰𝗵𝗲𝗱 : ${currentUser.totalAdsWatchedLifetime}
 ------------------------------------
-⏰ *𝗪𝗶𝘁𝗵𝗱𝗿𝗮𝘄𝗮𝗹 𝗧𝗶𝗺𝗲 :* ${new Date().toLocaleString('en-GB', { timeZone: 'Asia/Dhaka' })}
+⏰ *𝗪𝗶𝘁𝗵𝗱𝗿𝗿𝗮𝘄𝗮𝗹 𝗧𝗶𝗺𝗲 :* ${new Date().toLocaleString('en-GB', { timeZone: 'Asia/Dhaka' })}
             `;
 
             sendToTelegram(withdrawalDetails);
@@ -1690,7 +1775,7 @@
             updateUI();
             saveUserState();
 
-            statusMsg.textContent = "Withdrawal request submitted successfully!";
+            statusMsg.textContent = "Withdrawal request submitted successfully! Payment will be processed shortly.";
             statusMsg.classList.add('success-message');
             document.getElementById('withdrawAmountInput').value = "";
             document.getElementById('withdrawMethodSelect').value = "";
@@ -1751,10 +1836,10 @@
 🎉 *New Referral Bonus!* 🎉
 ------------------------------------
 👥 *New User:* \`${escapeMarkdown(refereeName)}\` (Code: \`${escapeMarkdown(refereeCode)}\`)
-🌟 *Received:* ${REFERRAL_BONUS_REFEREE} points
+🌟 *Received:* ৳ ${REFERRAL_BONUS_REFEREE}
 Referral From:
 👤 *Referrer:* \`${escapeMarkdown(referrerName)}\` (Code: \`${escapeMarkdown(referrerCode)}\`)
-🌟 *Received:* ${REFERRAL_BONUS_REFERRER} points
+🌟 *Received:* ৳ ${REFERRAL_BONUS_REFERRER}
 ------------------------------------
 ⏰ *Timestamp:* ${new Date().toLocaleString('en-GB', { timeZone: 'Asia/Dhaka' })}
             `;
@@ -1797,9 +1882,6 @@ Referral From:
         }
     </script>
 
-    <!-- নিচের দুর্বোধ্য জাভাস্ক্রিপ্ট ব্লকটি সরানো হয়েছে -->
-
-<!-- 'Det är ditt ansvar att meddela besökare om cookies som används och data som samlas in på bloggen. Blogger har en standardavisering som du kan använda på din blogg och som du kan anpassa eller byta ut till en egen avisering. Mer information finns på http://www.blogger.com/go/cookiechoices.' -->
 <script src="/js/cookienotice.js" defer></script>
 <script>
   document.addEventListener('DOMContentLoaded', function(event) {
@@ -1812,4 +1894,4 @@ Referral From:
 </script>
 
 </body>
-</html>```
+</html>
